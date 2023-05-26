@@ -8,6 +8,10 @@ module.exports = {
       handwriting: ['Kalam', 'cursive']
     },
     extend: {
+      boxShadow: {
+        colored: '0px 7px 16px rgba(127, 91, 220, 0.002)',
+        coloredHover: '0px 16px 25px rgba(127, 91, 220, 0.3)',
+      },
       colors: {
         lavenderIndigo: '#8657e1',
         daisyBush: '#4714a5',
