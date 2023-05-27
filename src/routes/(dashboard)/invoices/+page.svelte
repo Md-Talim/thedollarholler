@@ -6,7 +6,7 @@
   <title>Invoices | The Dollar Hollar</title>
 </svelte:head>
 
-<div class="flex items-center justify-between">
+<div class="mb-16 flex items-center justify-between">
   <!-- Search Field -->
   <Search />
 
@@ -16,3 +16,34 @@
     >+ Invoice</button
   >
 </div>
+
+<!-- List of Invoices -->
+<div>
+  <!-- Heading -->
+  <div class="table-header invoice-table">
+    <h3>Status</h3>
+    <h3>Issue Date</h3>
+    <h3>Id</h3>
+    <h3>Client</h3>
+    <h3>Amount</h3>
+    <div />
+    <div />
+  </div>
+
+  <!-- Invoices -->
+  <div class="invoice-table">
+    <div>draft</div>
+    <div>9/7/2023</div>
+    <div>1</div>
+    <div>Someone</div>
+    <div>$504</div>
+    <div>View</div>
+    <div>More</div>
+  </div>
+</div>
+
+<style lang="postcss">
+  .table-header h3 {
+    @apply text-xl font-bold leading-snug text-daisyBush;
+  }
+</style>

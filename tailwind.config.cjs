@@ -10,7 +10,7 @@ module.exports = {
     extend: {
       boxShadow: {
         colored: '0px 7px 16px rgba(127, 91, 220, 0.002)',
-        coloredHover: '0px 16px 25px rgba(127, 91, 220, 0.3)',
+        coloredHover: '0px 16px 25px rgba(127, 91, 220, 0.3)'
       },
       colors: {
         lavenderIndigo: '#8657e1',
@@ -31,6 +31,9 @@ module.exports = {
       zIndex: {
         navBarToggle: 91,
         navBar: 90
+      },
+      gridTemplateColumns: {
+        invoiceTable: '100px 100px 100px 1fr 100px 100px 100px'
       }
     }
   },
