@@ -1,8 +1,7 @@
 <script>
-  import { Search } from '$lib/components';
+  import { CircledAmount, Search, Tag } from '$lib/components';
   import ThreeDots from '$lib/components/Icons/ThreeDots.svelte';
   import View from '$lib/components/Icons/View.svelte';
-  import Tag from '$lib/components/Tag.svelte';
 </script>
 
 <svelte:head>
@@ -48,6 +47,9 @@
     </div>
   </div>
 </div>
+
+<!-- Circled Amount / Total Amount -->
+<CircledAmount label="Total" amount="1,440.00" />
 
 <style lang="postcss">
   .table-header h3 {
