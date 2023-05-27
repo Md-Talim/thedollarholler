@@ -1,5 +1,6 @@
 <script>
   import { Search } from '$lib/components';
+  import View from '$lib/components/Icons/View.svelte';
   import Tag from '$lib/components/Tag.svelte';
 </script>
 
@@ -33,12 +34,14 @@
 
   <!-- Invoices -->
   <div class="invoice-table">
-    <div><Tag label='draft' /></div>
-    <div>9/7/2023</div>
-    <div>1</div>
-    <div>Someone</div>
-    <div>$504</div>
-    <div>View</div>
+    <div><Tag label="draft" /></div>
+    <div class="text-lg">9/7/2023</div>
+    <div class="text-lg">1</div>
+    <div class="text-xl font-bold">Someone</div>
+    <div class="font-mono text-lg font-bold">$504</div>
+    <div class="center text-lg">
+      <a href="/" class="text-pastelPurple hover:text-daisyBush"><View /></a>
+    </div>
     <div>More</div>
   </div>
 </div>
