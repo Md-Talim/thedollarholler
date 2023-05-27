@@ -1,5 +1,6 @@
 <script>
   import { Search } from '$lib/components';
+  import ThreeDots from '$lib/components/Icons/ThreeDots.svelte';
   import View from '$lib/components/Icons/View.svelte';
   import Tag from '$lib/components/Tag.svelte';
 </script>
@@ -42,7 +43,9 @@
     <div class="center text-lg">
       <a href="/" class="text-pastelPurple hover:text-daisyBush"><View /></a>
     </div>
-    <div>More</div>
+    <div class="center text-lg">
+      <button class="text-pastelPurple hover:text-daisyBush"><ThreeDots /></button>
+    </div>
   </div>
 </div>
 
