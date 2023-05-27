@@ -34,7 +34,7 @@
   </div>
 
   <!-- Invoices -->
-  <div class="invoice-table">
+  <div class="invoice-table rounded-lg bg-white py-4 shadow-tableRow">
     <div><Tag label="draft" /></div>
     <div class="text-lg">9/7/2023</div>
     <div class="text-lg">1</div>

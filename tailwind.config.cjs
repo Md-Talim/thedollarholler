@@ -2,6 +2,9 @@
 module.exports = {
   content: ['./src/**/*.{html,js,svelte,ts}'],
   theme: {
+    boxShadow: {
+      tableRow: '0px 0px 6px rgba(0, 0, 0, 0.16)'
+    },
     fontFamily: {
       sansSerif: ['Source Sans Pro'],
       mono: ['Source Code Pro'],
