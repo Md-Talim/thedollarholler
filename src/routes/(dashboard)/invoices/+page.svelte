@@ -1,5 +1,6 @@
 <script>
   import { Search } from '$lib/components';
+  import Tag from '$lib/components/Tag.svelte';
 </script>
 
 <svelte:head>
@@ -32,7 +33,7 @@
 
   <!-- Invoices -->
   <div class="invoice-table">
-    <div>draft</div>
+    <div><Tag label='draft' /></div>
     <div>9/7/2023</div>
     <div>1</div>
     <div>Someone</div>
