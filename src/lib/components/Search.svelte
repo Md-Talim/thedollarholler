@@ -9,7 +9,7 @@
   <input
     type="text"
     placeholder="Search by Keyword"
-    class="border-b-2 border-dashed border-pastelPurple bg-transparent font-sansSerif text-lg outline-none focus:border-solid focus:border-lavenderIndigo"
+    class="w-full border-b-2 border-dashed border-pastelPurple bg-transparent font-sansSerif text-lg outline-none focus:border-solid focus:border-lavenderIndigo md:w-64"
   />
   <button class="font-sansSerif text-xl font-bold text-pastelPurple">Search</button>
 </div>

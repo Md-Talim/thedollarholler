@@ -8,13 +8,15 @@
   <title>Invoices | The Dollar Hollar</title>
 </svelte:head>
 
-<div class="mb-16 flex items-center justify-between">
+<div
+  class="mb-8 flex flex-col-reverse items-start justify-between gap-y-4 md:flex-row md:items-center lg:mb-16"
+>
   <!-- Search Field -->
   <Search />
 
   <!-- New Invoice Button -->
   <button
-    class="relative translate-y-0 whitespace-nowrap rounded-lg bg-lavenderIndigo px-10 py-3 text-xl font-bold text-white shadow-colored transition-all hover:-translate-y-2 hover:shadow-coloredHover"
+    class="lg-py-3 relative translate-y-0 whitespace-nowrap rounded-lg bg-lavenderIndigo px-5 py-2 text-xl font-bold text-white shadow-colored transition-all hover:-translate-y-2 hover:shadow-coloredHover lg:px-10"
     >+ Invoice</button
   >
 </div>
@@ -22,7 +24,7 @@
 <!-- List of Invoices -->
 <div>
   <!-- Heading -->
-  <div class="table-header invoice-table">
+  <div class="table-header invoice-table hidden lg:grid">
     <h3>Status</h3>
     <h3>Issue Date</h3>
     <h3>Id</h3>
@@ -33,16 +35,16 @@
   </div>
 
   <!-- Invoices -->
-  <div class="invoice-table rounded-lg bg-white py-4 shadow-tableRow">
-    <div><Tag label="draft" /></div>
-    <div class="text-lg">9/7/2023</div>
-    <div class="text-lg">1</div>
-    <div class="text-xl font-bold">Someone</div>
-    <div class="font-mono text-lg font-bold">$504</div>
-    <div class="center text-lg">
+  <div class="invoice-table invoice-row rounded-lg bg-white py-2 shadow-tableRow md:py-4">
+    <div class="status"><Tag className="ml-auto lg:ml-0" label="draft" /></div>
+    <div class="due-date text-sm md:text-lg">9/7/2023</div>
+    <div class="invoice-number text-sm md:text-lg">1</div>
+    <div class="client-name text-base font-bold md:text-xl">Someone</div>
+    <div class="amount text-right font-mono text-sm font-bold md:text-lg lg:text-left">$504</div>
+    <div class="lg:center view-button hidden text-sm md:text-lg lg:block">
       <a href="/" class="text-pastelPurple hover:text-daisyBush"><View /></a>
     </div>
-    <div class="center text-lg">
+    <div class="lg:center more-button hidden text-sm md:text-lg lg:block">
       <button class="text-pastelPurple hover:text-daisyBush"><ThreeDots /></button>
     </div>
   </div>
@@ -54,5 +56,37 @@
 <style lang="postcss">
   .table-header h3 {
     @apply text-xl font-bold leading-snug text-daisyBush;
+  }
+
+  .invoice-row {
+    grid-template-areas: 'invoice-number invoice-number' 'client-name amount' 'due-date status';
+  }
+
+  @media (min-width: 1024px) {
+    .invoice-row {
+      grid-template-areas: 'status due-date invoice-number client-name amount view-button more-button';
+    }
+  }
+
+  .status {
+    grid-area: status;
+  }
+  .due-date {
+    grid-area: due-date;
+  }
+  .invoice-number {
+    grid-area: invoice-number;
+  }
+  .client-name {
+    grid-area: client-name;
+  }
+  .amount {
+    grid-area: amount;
+  }
+  .view-button {
+    grid-area: view-button;
+  }
+  .more-button {
+    grid-area: more-button;
   }
 </style>
