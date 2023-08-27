@@ -1,4 +1,4 @@
-import type { LineItem } from '../../global';
+import type { Invoice, LineItem } from '../../global';
 
 export const sumLineItems = (lineItems: LineItem[] | undefined): number => {
   if (!lineItems) return 0;
@@ -18,4 +18,11 @@ export const centsToDollars = (cents: number): string => {
   const dollars = cents / 100;
   const decimaledDollars = twoDecimals(dollars);
   return addThousandSeparator(decimaledDollars);
+};
+
+export const sumInvoices = (invoices: Invoice[]): number => {
+  return invoices.reduce((prevValue, curValue) => {
+    const sumInvoice = sumLineItems(curValue.lineItems);
+    return prevValue + sumInvoice;
+  }, 0);
 };
