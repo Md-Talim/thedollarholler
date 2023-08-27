@@ -2,6 +2,7 @@
   import { Tag } from '$lib/components';
   import ThreeDots from '$lib/components/Icons/ThreeDots.svelte';
   import View from '$lib/components/Icons/View.svelte';
+  import { convertDateFormat } from '$lib/utils/dateHelpers';
   import { centsToDollars, sumLineItems } from '$lib/utils/moneyHelpers';
   import type { Invoice } from '../../../global';
 
@@ -10,7 +11,7 @@
 
 <div class="invoice-table invoice-row rounded-lg bg-white py-2 shadow-tableRow md:py-4">
   <div class="status"><Tag className="ml-auto lg:ml-0" label={invoice.invoiceStatus} /></div>
-  <div class="due-date text-sm md:text-lg">{invoice.dueDate}</div>
+  <div class="due-date text-sm md:text-lg">{convertDateFormat(invoice.dueDate)}</div>
   <div class="invoice-number text-sm md:text-lg">{invoice.invoiceNumber}</div>
   <div class="client-name truncate whitespace-nowrap text-base font-bold md:text-xl">
     {invoice.client.name}
