@@ -1,7 +1,13 @@
 <script>
-  import { CircledAmount, Search, Tag } from '$lib/components';
-  import ThreeDots from '$lib/components/Icons/ThreeDots.svelte';
-  import View from '$lib/components/Icons/View.svelte';
+  import { CircledAmount, Search } from '$lib/components';
+  import { invoices, loadInvoices } from '$lib/stores/InvoiceStore';
+  import { onMount } from 'svelte';
+  import InvoiceRow from './InvoiceRow.svelte';
+
+  onMount(() => {
+    loadInvoices();
+    console.log($invoices);
+  });
 </script>
 
 <svelte:head>
@@ -35,19 +41,9 @@
   </div>
 
   <!-- Invoices -->
-  <div class="invoice-table invoice-row rounded-lg bg-white py-2 shadow-tableRow md:py-4">
-    <div class="status"><Tag className="ml-auto lg:ml-0" label="draft" /></div>
-    <div class="due-date text-sm md:text-lg">9/7/2023</div>
-    <div class="invoice-number text-sm md:text-lg">1</div>
-    <div class="client-name text-base font-bold md:text-xl">Someone</div>
-    <div class="amount text-right font-mono text-sm font-bold md:text-lg lg:text-left">$504</div>
-    <div class="lg:center view-button hidden text-sm md:text-lg lg:block">
-      <a href="/" class="text-pastelPurple hover:text-daisyBush"><View /></a>
-    </div>
-    <div class="lg:center more-button hidden text-sm md:text-lg lg:block">
-      <button class="text-pastelPurple hover:text-daisyBush"><ThreeDots /></button>
-    </div>
-  </div>
+  {#each $invoices as invoice}
+    <InvoiceRow {invoice} />
+  {/each}
 </div>
 
 <!-- Circled Amount / Total Amount -->
@@ -56,37 +52,5 @@
 <style lang="postcss">
   .table-header h3 {
     @apply text-xl font-bold leading-snug text-daisyBush;
-  }
-
-  .invoice-row {
-    grid-template-areas: 'invoice-number invoice-number' 'client-name amount' 'due-date status';
-  }
-
-  @media (min-width: 1024px) {
-    .invoice-row {
-      grid-template-areas: 'status due-date invoice-number client-name amount view-button more-button';
-    }
-  }
-
-  .status {
-    grid-area: status;
-  }
-  .due-date {
-    grid-area: due-date;
-  }
-  .invoice-number {
-    grid-area: invoice-number;
-  }
-  .client-name {
-    grid-area: client-name;
-  }
-  .amount {
-    grid-area: amount;
-  }
-  .view-button {
-    grid-area: view-button;
-  }
-  .more-button {
-    grid-area: more-button;
   }
 </style>
