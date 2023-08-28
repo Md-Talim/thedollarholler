@@ -1,9 +1,11 @@
 <script>
   import { CircledAmount, Search } from '$lib/components';
   import { invoices, loadInvoices } from '$lib/stores/InvoiceStore';
-  import { onMount } from 'svelte';
-  import InvoiceRow from './InvoiceRow.svelte';
   import { centsToDollars, sumInvoices } from '$lib/utils/moneyHelpers';
+  import { onMount } from 'svelte';
+  import BlankState from './BlankState.svelte';
+  import InvoiceRow from './InvoiceRow.svelte';
+  import InvoiceRowHeader from './InvoiceRowHeader.svelte';
 
   onMount(() => {
     loadInvoices();
@@ -19,7 +21,11 @@
   class="mb-8 flex flex-col-reverse items-start justify-between gap-y-4 md:flex-row md:items-center lg:mb-16"
 >
   <!-- Search Field -->
-  <Search />
+  {#if $invoices.length > 0}
+    <Search />
+  {:else}
+    <div />
+  {/if}
 
   <!-- New Invoice Button -->
   <button
@@ -30,30 +36,20 @@
 
 <!-- List of Invoices -->
 <div>
-  <!-- Heading -->
-  <div class="table-header invoice-table hidden lg:grid">
-    <h3>Status</h3>
-    <h3>Issue Date</h3>
-    <h3>Id</h3>
-    <h3>Client</h3>
-    <h3 class="text-right">Amount</h3>
-    <div />
-    <div />
-  </div>
-
-  <!-- Invoices -->
-  <div class="flex flex-col-reverse">
-    {#each $invoices as invoice}
-      <InvoiceRow {invoice} />
-    {/each}
-  </div>
+  {#if $invoices === null}
+    Loading...
+  {:else if $invoices.length <= 0}
+    <BlankState />
+  {:else}
+    <!-- Heading -->
+    <InvoiceRowHeader className="text-daisyBush" />
+    <!-- Invoices -->
+    <div class="flex flex-col-reverse">
+      {#each $invoices as invoice}
+        <InvoiceRow {invoice} />
+      {/each}
+    </div>
+    <!-- Circled Amount / Total Amount -->
+    <CircledAmount label="Total" amount={`${centsToDollars(sumInvoices($invoices))}`} />
+  {/if}
 </div>
-
-<!-- Circled Amount / Total Amount -->
-<CircledAmount label="Total" amount={`${centsToDollars(sumInvoices($invoices))}`} />
-
-<style lang="postcss">
-  .table-header h3 {
-    @apply text-xl font-bold leading-snug text-daisyBush;
-  }
-</style>
