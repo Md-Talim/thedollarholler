@@ -6,6 +6,7 @@
   import BlankState from './BlankState.svelte';
   import InvoiceRow from './InvoiceRow.svelte';
   import InvoiceRowHeader from './InvoiceRowHeader.svelte';
+  import Portal from '$lib/components/Portal.svelte';
 
   onMount(() => {
     loadInvoices();
@@ -36,6 +37,8 @@
 
 <!-- List of Invoices -->
 <div>
+  <Portal><div>Invoice Form</div></Portal>
+
   {#if $invoices === null}
     Loading...
   {:else if $invoices.length <= 0}

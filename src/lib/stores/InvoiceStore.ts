@@ -5,6 +5,6 @@ import type { Invoice } from '../../global';
 export const invoices = writable<Invoice[]>([]);
 
 export const loadInvoices = () => {
-  // invoices.set(data.invoices);
-  invoices.set([]);
+  invoices.set(data.invoices);
+  // invoices.set([]);
 };
