@@ -8,15 +8,23 @@
   import { convertDateFormat, isLate } from '$lib/utils/dateHelpers';
   import { centsToDollars, sumLineItems } from '$lib/utils/moneyHelpers';
   import type { Invoice } from '../../../global';
+  import Modal from '$lib/components/Modal.svelte';
+  import Button from '$lib/components/Button.svelte';
+  import { deleteInvoice } from '$lib/stores/InvoiceStore';
 
   export let invoice: Invoice;
   let isAdditionalOptionsShowing = false;
   let isOptionsDisabled = false;
+  let isModalShowing: boolean = false;
+
+  const amount = centsToDollars(sumLineItems(invoice.lineItems));
 
   const handleEdit = () => {
     console.log('editing...');
   };
   const handleDelete = () => {
+    isModalShowing = true;
+    isAdditionalOptionsShowing = false;
     console.log('deleting...');
   };
   const handleSendInvoice = () => {
@@ -47,7 +55,7 @@
     {invoice.client.name}
   </div>
   <div class="amount text-right font-mono text-sm font-bold lg:text-lg">
-    ${centsToDollars(sumLineItems(invoice.lineItems))}
+    ${amount}
   </div>
   <div class="view-button lg:center hidden text-sm md:text-lg">
     <a href="/" class="text-pastelPurple hover:text-daisyBush"><View /></a>
@@ -72,6 +80,37 @@
     {/if}
   </div>
 </div>
+
+<Modal isVisible={isModalShowing} on:close={() => (isModalShowing = false)}>
+  <div class="flex h-full min-h-[175px] flex-col justify-between">
+    <p class="text-center text-xl font-bold text-daisyBush">
+      Are you sure you want to delete this invoice to <span class="text-scarlet"
+        >{invoice.client.name}</span
+      >
+      for
+      <span class="text-scarlet">${amount}</span>?
+    </p>
+    <div class="flex gap-4">
+      <Button
+        label="Cancel"
+        isAnimated={false}
+        onClick={() => {
+          isModalShowing = false;
+        }}
+        style="secondary"
+      />
+      <Button
+        label="Yes, Delete It"
+        isAnimated={false}
+        onClick={() => {
+          deleteInvoice(invoice);
+          isModalShowing = false;
+        }}
+        style="destructive"
+      />
+    </div>
+  </div>
+</Modal>
 
 <style lang="postcss">
   .invoice-row {

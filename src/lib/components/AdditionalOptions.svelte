@@ -15,6 +15,7 @@
       <li>
         <button
           class="flex w-full gap-x-2 p-4 font-sansSerif font-bold text-pastelPurple hover:text-daisyBush"
+          on:click={option.onClick}
         >
           {#if option.icon}
             <svelte:component this={option.icon} />
