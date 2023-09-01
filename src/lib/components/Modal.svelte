@@ -1,8 +1,7 @@
 <script lang="ts">
+  import { Overlay, Portal } from '$lib/components';
+  import { Cancel } from '$lib/components/Icons';
   import { createEventDispatcher } from 'svelte';
-  import Cancel from './Icons/Cancel.svelte';
-  import Overlay from './Overlay.svelte';
-  import Portal from './Portal.svelte';
 
   export let isVisible: boolean = false;
 

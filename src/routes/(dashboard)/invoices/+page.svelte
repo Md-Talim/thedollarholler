@@ -1,6 +1,5 @@
 <script lang="ts">
-  import { CircledAmount, Search } from '$lib/components';
-  import Button from '$lib/components/Button.svelte';
+  import { Button, CircledAmount, Search } from '$lib/components';
   import { invoices, loadInvoices } from '$lib/stores/InvoiceStore';
   import { centsToDollars, sumInvoices } from '$lib/utils/moneyHelpers';
   import { onMount } from 'svelte';

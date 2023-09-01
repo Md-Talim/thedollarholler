@@ -1,16 +1,10 @@
 <script lang="ts">
-  import { AdditionalOptions, Tag } from '$lib/components';
-  import ThreeDots from '$lib/components/Icons/ThreeDots.svelte';
-  import View from '$lib/components/Icons/View.svelte';
-  import Edit from '$lib/components/Icons/Edit.svelte';
-  import Trash from '$lib/components/Icons/Trash.svelte';
-  import Send from '$lib/components/Icons/Send.svelte';
+  import { AdditionalOptions, Button, Modal, Tag } from '$lib/components';
+  import { Edit, Send, ThreeDots, Trash, View } from '$lib/components/Icons';
+  import { deleteInvoice } from '$lib/stores/InvoiceStore';
   import { convertDateFormat, isLate } from '$lib/utils/dateHelpers';
   import { centsToDollars, sumLineItems } from '$lib/utils/moneyHelpers';
   import type { Invoice } from '../../../global';
-  import Modal from '$lib/components/Modal.svelte';
-  import Button from '$lib/components/Button.svelte';
-  import { deleteInvoice } from '$lib/stores/InvoiceStore';
 
   export let invoice: Invoice;
   let isAdditionalOptionsShowing = false;

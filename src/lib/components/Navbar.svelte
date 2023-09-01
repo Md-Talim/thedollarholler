@@ -1,7 +1,6 @@
 <script lang="ts">
   import { page } from '$app/stores';
-  import Close from './Icons/Close.svelte';
-  import Hamburger from './Icons/Hamburger.svelte';
+  import { Close, Hamburger } from '$lib/components/Icons';
 
   let isNavShowing = false;
 </script>

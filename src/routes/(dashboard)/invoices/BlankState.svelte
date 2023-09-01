@@ -1,5 +1,5 @@
 <script>
-  import BlankRow from '$lib/components/BlankRow.svelte';
+  import { BlankRow } from '$lib/components';
   import InvoiceRowHeader from './InvoiceRowHeader.svelte';
 </script>
 
