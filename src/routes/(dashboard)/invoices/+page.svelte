@@ -6,6 +6,7 @@
   import BlankState from './BlankState.svelte';
   import InvoiceRow from './InvoiceRow.svelte';
   import InvoiceRowHeader from './InvoiceRowHeader.svelte';
+  import InvoiceForm from './InvoiceForm.svelte';
 
   let isInvoiceFormShowing: boolean = false;
 
@@ -60,5 +61,7 @@
 
 <!-- Slide Panel -->
 {#if isInvoiceFormShowing}
-  <SlidePanel on:close={() => (isInvoiceFormShowing = false)}>Invoice Form</SlidePanel>
+  <SlidePanel on:close={() => (isInvoiceFormShowing = false)}>
+    <InvoiceForm />
+  </SlidePanel>
 {/if}
