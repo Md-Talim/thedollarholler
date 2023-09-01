@@ -1,3 +1,4 @@
+import Arrow from './Arrow.svelte';
 import Cancel from './Cancel.svelte';
 import Close from './Close.svelte';
 import Edit from './Edit.svelte';
@@ -8,4 +9,4 @@ import ThreeDots from './ThreeDots.svelte';
 import Trash from './Trash.svelte';
 import View from './View.svelte';
 
-export { Cancel, Close, Edit, Hamburger, Search, Send, ThreeDots, Trash, View };
+export { Arrow, Cancel, Close, Edit, Hamburger, Search, Send, ThreeDots, Trash, View };

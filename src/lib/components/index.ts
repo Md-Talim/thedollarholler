@@ -7,6 +7,7 @@ import Navbar from './Navbar.svelte';
 import Overlay from './Overlay.svelte';
 import Portal from './Portal.svelte';
 import Search from './Search.svelte';
+import SlidePanel from './SlidePanel.svelte';
 import Tag from './Tag.svelte';
 
 export {
@@ -19,5 +20,6 @@ export {
   Overlay,
   Portal,
   Search,
+  SlidePanel,
   Tag
 };

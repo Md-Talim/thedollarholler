@@ -2,9 +2,6 @@
 module.exports = {
   content: ['./src/**/*.{html,js,svelte,ts}'],
   theme: {
-    boxShadow: {
-      tableRow: '0px 0px 6px rgba(0, 0, 0, 0.16)'
-    },
     fontFamily: {
       sansSerif: ['Source Sans Pro'],
       mono: ['Source Code Pro'],
@@ -13,7 +10,9 @@ module.exports = {
     extend: {
       boxShadow: {
         colored: '0px 7px 16px rgba(127, 91, 220, 0.002)',
-        coloredHover: '0px 16px 25px rgba(127, 91, 220, 0.3)'
+        coloredHover: '0px 16px 25px rgba(127, 91, 220, 0.3)',
+        slidePanel: '-4px 0px 44px rgba(0, 0, 0, 0.25)',
+        tableRow: '0px 0px 6px rgba(0, 0, 0, 0.16)'
       },
       backgroundImage: {
         arrowLeftUp: "url('/images/arrow-left-up.svg')",
@@ -39,7 +38,8 @@ module.exports = {
       },
       zIndex: {
         modal: 999,
-        overlay: 998,
+        slidePanel: 998,
+        overlay: 997,
         navBarToggle: 91,
         navBar: 90
       },
