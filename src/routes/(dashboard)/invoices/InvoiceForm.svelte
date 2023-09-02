@@ -1,6 +1,15 @@
 <script>
   import { Button } from '$lib/components';
   import { Trash } from '$lib/components/Icons';
+  import LineItemRows from './LineItemRows.svelte';
+  const blankLineItem = [
+    {
+      id: '1',
+      description: '',
+      quantity: 0,
+      amount: 0
+    }
+  ];
 </script>
 
 <h2 class="mb-7 font-sansSerif text-3xl font-bold text-daisyBush">Add an Invoice</h2>
@@ -43,7 +52,9 @@
   </div>
 
   <!-- Line Items -->
-  <div class="field col-span-6">Line Items</div>
+  <div class="field col-span-6">
+    <LineItemRows lineItems={blankLineItem} />
+  </div>
 
   <!-- Notes -->
   <div class="field col-span-6">
@@ -69,7 +80,7 @@
     <!-- Show only if editing -->
     <Button
       label="Delete"
-      style="textOnly"
+      style="textOnlyDestructive"
       onClick={() => {}}
       leftIcon={Trash}
       isAnimated={false}

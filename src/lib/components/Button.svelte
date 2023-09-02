@@ -1,7 +1,13 @@
 <script lang="ts">
   import type { SvelteComponent } from 'svelte';
 
-  export let style: 'primary' | 'secondary' | 'destructive' | 'outline' | 'textOnly' = 'primary';
+  export let style:
+    | 'primary'
+    | 'secondary'
+    | 'destructive'
+    | 'outline'
+    | 'textOnly'
+    | 'textOnlyDestructive' = 'primary';
   export let isAnimated = true;
   export let label: string;
   export let onClick: () => void;
@@ -18,6 +24,7 @@
   class:destructive={style === 'destructive'}
   class:outline={style === 'outline'}
   class:textOnly={style === 'textOnly'}
+  class:textOnlyDestructive={style === 'textOnlyDestructive'}
 >
   {#if leftIcon}
     <svelte:component this={leftIcon} class="mr-2" />
@@ -45,6 +52,9 @@
     @apply border-daisyBush text-daisyBush hover:border hover:border-daisyBush hover:bg-daisyBush hover:text-white;
   }
   .textOnly {
+    @apply bg-transparent px-0 text-lavenderIndigo no-underline hover:underline;
+  }
+  .textOnlyDestructive {
     @apply bg-transparent px-0 text-scarlet underline hover:no-underline;
   }
 </style>
