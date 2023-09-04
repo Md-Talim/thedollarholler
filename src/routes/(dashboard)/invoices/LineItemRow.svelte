@@ -2,33 +2,66 @@
   import { createEventDispatcher } from 'svelte';
   import { Trash } from '$lib/components/Icons';
   import type { LineItem } from '../../../global';
+  import { dollarsToCents, twoDecimals } from '$lib/utils/moneyHelpers';
 
+  export let canDelete: boolean = false;
   export let lineItem: LineItem;
   const dispatch = createEventDispatcher();
+
+  let unitPrice: string = twoDecimals(lineItem.amount / lineItem.quantity);
+  let amount: string = twoDecimals(lineItem.amount);
+
+  $: {
+    amount = twoDecimals(lineItem.quantity * Number(unitPrice));
+    lineItem.amount = dollarsToCents(Number(amount));
+  }
 </script>
 
 <div class="invoice-line-item border-b-2 border-fog py-2">
   <div>
-    <input class="line-item" type="text" name="description" />
+    <input class="line-item" type="text" name="description" bind:value={lineItem.description} />
   </div>
 
   <div>
-    <input class="line-item text-right" type="number" name="unitPrice" step="0.01" min="0" />
+    <input
+      class="line-item text-right"
+      type="number"
+      name="unitPrice"
+      step="0.01"
+      min="0"
+      bind:value={unitPrice}
+    />
   </div>
 
   <div>
-    <input class="line-item text-center" type="number" name="quantity" min="0" />
+    <input
+      class="line-item text-center"
+      type="number"
+      name="quantity"
+      min="0"
+      bind:value={lineItem.quantity}
+    />
   </div>
 
   <div>
-    <input class="line-item text-right" type="number" name="amount" step="0.01" min="0" />
+    <input
+      class="line-item text-right"
+      type="number"
+      name="amount"
+      step="0.01"
+      min="0"
+      bind:value={amount}
+      disabled
+    />
   </div>
 
   <div>
-    <button
-      class="center h-10 w-10 text-pastelPurple hover:text-lavenderIndigo"
-      on:click|preventDefault={() => dispatch('removeLineItem', lineItem.id)}><Trash /></button
-    >
+    {#if canDelete}
+      <button
+        class="center h-10 w-10 text-pastelPurple hover:text-lavenderIndigo"
+        on:click|preventDefault={() => dispatch('removeLineItem', lineItem.id)}><Trash /></button
+      >
+    {/if}
   </div>
 </div>
 
@@ -49,5 +82,10 @@
   input[type='text']:focus,
   input[type='number']:focus {
     @apply border-solid border-lavenderIndigo outline-none;
+  }
+
+  input[type='text']:disabled,
+  input[type='number']:disabled {
+    @apply border-b-0 bg-transparent px-0;
   }
 </style>

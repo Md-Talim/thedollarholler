@@ -12,13 +12,14 @@
     amount: 0
   };
 
-  let lineItems: LineItem[] = [blankLineItem];
+  let lineItems: LineItem[] = [{ ...blankLineItem }];
 
   const AddLineItem = () => {
     lineItems = [...lineItems, { ...blankLineItem, id: uuidv4() }];
   };
 
   const RemoveLineItem = (event: { detail: string }) => {
+    if (lineItems.length <= 1) return;
     lineItems = lineItems.filter((item) => item.id !== event.detail);
   };
 </script>

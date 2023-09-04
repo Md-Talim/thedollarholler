@@ -41,6 +41,16 @@ export const centsToDollars = (cents: number): string => {
 };
 
 /**
+ * Converts a dollar amount to cents.
+ *
+ * @param {number} dollars - The amount in dollars.
+ * @return {number} The amount in cents.
+ */
+export const dollarsToCents = (dollars: number): number => {
+  return dollars * 100;
+};
+
+/**
  * Takes all the invoices and calculates the total
  * @param {Invoice[]} invoices Array of Invoices
  * @returns {number} The sum of total invoices
