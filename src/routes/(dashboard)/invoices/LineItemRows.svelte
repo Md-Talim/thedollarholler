@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Button, CircledAmount } from '$lib/components';
-  import { centsToDollars, sumLineItems } from '$lib/utils/moneyHelpers';
+  import { centsToDollars, sumLineItems, twoDecimals } from '$lib/utils/moneyHelpers';
   import { createEventDispatcher } from 'svelte';
   import type { LineItem } from '../../../global';
   import LineItemRow from './LineItemRow.svelte';
@@ -8,8 +8,16 @@
   export let lineItems: LineItem[] | undefined = undefined;
   const dispatch = createEventDispatcher();
 
+  let discount: number;
+  let discountedAmount: string = '0.00';
   let subtotal: string = '0.00';
-  $: subtotal = centsToDollars(sumLineItems(lineItems));
+
+  $: if (sumLineItems(lineItems) > 0) {
+    subtotal = centsToDollars(sumLineItems(lineItems));
+  }
+  $: if (subtotal && discount) {
+    discountedAmount = centsToDollars(sumLineItems(lineItems) * (discount / 100));
+  }
 </script>
 
 <div class="invoice-line-item border-b-2 border-daisyBush pb-2">
@@ -49,10 +57,11 @@
       name="discount"
       min="0"
       max="100"
+      bind:value={discount}
     />
     <span class="absolute right-0 top-2 font-mono">%</span>
   </div>
-  <div class="py-5 text-right font-mono">$10.00</div>
+  <div class="py-5 text-right font-mono">${discountedAmount}</div>
 </div>
 
 <div class="invoice-line-item">
