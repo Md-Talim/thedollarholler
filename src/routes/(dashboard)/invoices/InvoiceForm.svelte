@@ -22,6 +22,10 @@
     if (lineItems.length <= 1) return;
     lineItems = lineItems.filter((item) => item.id !== event.detail);
   };
+
+  const UpdateLineItems = () => {
+    lineItems = lineItems;
+  };
 </script>
 
 <h2 class="mb-7 font-sansSerif text-3xl font-bold text-daisyBush">Add an Invoice</h2>
@@ -65,7 +69,12 @@
 
   <!-- Line Items -->
   <div class="field col-span-6">
-    <LineItemRows {lineItems} on:addlineItem={AddLineItem} on:removeLineItem={RemoveLineItem} />
+    <LineItemRows
+      {lineItems}
+      on:addlineItem={AddLineItem}
+      on:removeLineItem={RemoveLineItem}
+      on:updateLineItems={UpdateLineItems}
+    />
   </div>
 
   <!-- Notes -->

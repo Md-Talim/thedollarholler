@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
   import { Trash } from '$lib/components/Icons';
-  import type { LineItem } from '../../../global';
   import { dollarsToCents, twoDecimals } from '$lib/utils/moneyHelpers';
+  import { createEventDispatcher } from 'svelte';
+  import type { LineItem } from '../../../global';
 
   export let canDelete: boolean = false;
   export let lineItem: LineItem;
@@ -30,6 +30,10 @@
       step="0.01"
       min="0"
       bind:value={unitPrice}
+      on:blur={() => {
+        unitPrice = twoDecimals(Number(unitPrice));
+        dispatch('updateLineItems');
+      }}
     />
   </div>
 
@@ -40,6 +44,9 @@
       name="quantity"
       min="0"
       bind:value={lineItem.quantity}
+      on:blur={() => {
+        dispatch('updateLineItems');
+      }}
     />
   </div>
 

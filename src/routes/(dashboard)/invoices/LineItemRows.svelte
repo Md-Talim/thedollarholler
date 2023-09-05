@@ -1,11 +1,15 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
   import { Button, CircledAmount } from '$lib/components';
+  import { centsToDollars, sumLineItems } from '$lib/utils/moneyHelpers';
+  import { createEventDispatcher } from 'svelte';
   import type { LineItem } from '../../../global';
   import LineItemRow from './LineItemRow.svelte';
 
   export let lineItems: LineItem[] | undefined = undefined;
   const dispatch = createEventDispatcher();
+
+  let subtotal: string = '0.00';
+  $: subtotal = centsToDollars(sumLineItems(lineItems));
 </script>
 
 <div class="invoice-line-item border-b-2 border-daisyBush pb-2">
@@ -17,7 +21,7 @@
 
 {#if lineItems}
   {#each lineItems as lineItem, index}
-    <LineItemRow {lineItem} on:removeLineItem canDelete={index > 0} />
+    <LineItemRow {lineItem} on:removeLineItem canDelete={index > 0} on:updateLineItems />
   {/each}
 {/if}
 
@@ -33,7 +37,7 @@
     />
   </div>
   <div class="py-5 text-right font-bold text-monsoon">Subtotal</div>
-  <div class="py-5 text-right font-mono">$250</div>
+  <div class="py-5 text-right font-mono">${subtotal}</div>
 </div>
 
 <div class="invoice-line-item">
