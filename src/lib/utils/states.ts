@@ -1,0 +1,32 @@
+const states = [
+  { value: 'AP', name: 'Andhra Pradesh' },
+  { value: 'AP', name: 'Arunachal Pradesh' },
+  { value: 'AS', name: 'Assam' },
+  { value: 'BR', name: 'Bihar' },
+  { value: 'CH', name: 'Chhattisgarh' },
+  { value: 'GA', name: 'Goa' },
+  { value: 'GJ', name: 'Gujarat' },
+  { value: 'HP', name: 'Himachal Pradesh' },
+  { value: 'HR', name: 'Haryana' },
+  { value: 'JH', name: 'Jharkhand' },
+  { value: 'KA', name: 'Karnataka' },
+  { value: 'KA', name: 'Kerala' },
+  { value: 'MH', name: 'Maharashtra' },
+  { value: 'ML', name: 'Meghalaya' },
+  { value: 'MN', name: 'Manipur' },
+  { value: 'MP', name: 'Madhya Pradesh' },
+  { value: 'MZ', name: 'Mizoram' },
+  { value: 'NL', name: 'Nagaland' },
+  { value: 'OR', name: 'Odisha' },
+  { value: 'PB', name: 'Punjab' },
+  { value: 'RJ', name: 'Rajasthan' },
+  { value: 'SK', name: 'Sikkim' },
+  { value: 'TN', name: 'Tamil Nadu' },
+  { value: 'TN', name: 'Telangana' },
+  { value: 'TR', name: 'Tripura' },
+  { value: 'UP', name: 'Uttar Pradesh' },
+  { value: 'UT', name: 'Uttarakhand' },
+  { value: 'WB', name: 'West Bengal' }
+];
+
+export default states;
