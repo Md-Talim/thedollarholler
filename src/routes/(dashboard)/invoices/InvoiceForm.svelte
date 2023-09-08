@@ -180,6 +180,10 @@
 
   <div class="field col-span-4 flex justify-end gap-x-5">
     <Button label="Cancel" onClick={() => {}} style="secondary" isAnimated={false} />
-    <Button label="Save" onClick={() => {}} />
+    <button
+      class="button translate-y-0 bg-lavenderIndigo text-white shadow-colored transition-all hover:-translate-y-2 hover:shadow-coloredHover"
+    >
+      Save
+    </button>
   </div>
 </form>
