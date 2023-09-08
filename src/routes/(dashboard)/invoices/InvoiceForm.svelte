@@ -8,6 +8,7 @@
   import LineItemRows from './LineItemRows.svelte';
   import states from '$lib/utils/states';
   import { onMount } from 'svelte';
+  import { today } from '$lib/utils/dateHelpers';
 
   const blankLineItem = {
     id: uuidv4(),
@@ -79,8 +80,8 @@
 
   <!-- Invoice Id -->
   <div class="field col-span-2">
-    <label for="id">Invoice Id</label>
-    <input type="number" name="id" />
+    <label for="invoiceNumber">Invoice Id</label>
+    <input type="number" name="invoiceNumber" required />
   </div>
 
   <!-- New Client Information -->
@@ -121,13 +122,13 @@
   <!-- Due Date -->
   <div class="field col-span-2">
     <label for="dueDate">Due Date</label>
-    <input type="date" name="dueDate" />
+    <input type="date" name="dueDate" min={today} required />
   </div>
 
   <!-- Issue Date -->
   <div class="field col-span-2 col-start-5">
     <label for="issueDate">Issue Date</label>
-    <input type="date" name="issueDate" />
+    <input type="date" name="issueDate" min={today} />
   </div>
 
   <!-- Subject -->
