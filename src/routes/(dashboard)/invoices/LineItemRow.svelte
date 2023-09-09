@@ -2,7 +2,6 @@
   import { Trash } from '$lib/components/Icons';
   import { dollarsToCents, twoDecimals } from '$lib/utils/moneyHelpers';
   import { createEventDispatcher } from 'svelte';
-  import type { LineItem } from '../../../global';
 
   export let canDelete: boolean = false;
   export let lineItem: LineItem;

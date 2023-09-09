@@ -1,5 +1,3 @@
-import type { Invoice, LineItem } from '../../global';
-
 /**
  * Takes all the line items and sums them up
  * @param {Array | undefined} lineItems The array of line items

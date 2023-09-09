@@ -1,14 +1,13 @@
 <script lang="ts">
-  import { clients, loadClients } from '$lib/stores/clientStore';
-  import { slide } from 'svelte/transition';
-  import { v4 as uuidv4 } from 'uuid';
   import { Button } from '$lib/components';
   import { Trash } from '$lib/components/Icons';
-  import type { LineItem } from '../../../global';
-  import LineItemRows from './LineItemRows.svelte';
+  import { clients, loadClients } from '$lib/stores/clientStore';
+  import { today } from '$lib/utils/dateHelpers';
   import states from '$lib/utils/states';
   import { onMount } from 'svelte';
-  import { today } from '$lib/utils/dateHelpers';
+  import { slide } from 'svelte/transition';
+  import { v4 as uuidv4 } from 'uuid';
+  import LineItemRows from './LineItemRows.svelte';
 
   const blankLineItem = {
     id: uuidv4(),

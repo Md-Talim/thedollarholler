@@ -4,7 +4,6 @@
   import { deleteInvoice } from '$lib/stores/InvoiceStore';
   import { convertDateFormat, isLate } from '$lib/utils/dateHelpers';
   import { centsToDollars, sumLineItems } from '$lib/utils/moneyHelpers';
-  import type { Invoice } from '../../../global';
 
   export let invoice: Invoice;
   let isAdditionalOptionsShowing = false;
