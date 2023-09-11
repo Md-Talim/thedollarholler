@@ -18,7 +18,7 @@
   $: if (subtotal && discount) {
     discountedAmount = centsToDollars(sumLineItems(lineItems) * (discount / 100));
   }
-  $: total = twoDecimals(parseInt(subtotal) - parseInt(discountedAmount));
+  $: total = twoDecimals(Number(subtotal) - Number(discountedAmount));
 </script>
 
 <div class="invoice-line-item border-b-2 border-daisyBush pb-2">

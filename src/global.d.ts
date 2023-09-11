@@ -1,15 +1,16 @@
-import type { ClientStatus, invoiceStatus } from './enums';
+import type { ClientStatus, InvoiceStatus } from './enums';
 
 declare global {
   interface Invoice {
     client: Client;
     createdAt: string;
+    discount?: number;
     dueDate: string;
     id: string;
     invoiceNumber: string;
-    invoiceStatus: invoiceStatus;
+    invoiceStatus: InvoiceStatus;
     issueDate: string;
-    lineItems: LineItem[];
+    lineItems?: LineItem[];
     notes?: string;
     subject?: string;
     terms?: string;
@@ -23,15 +24,14 @@ declare global {
   }
 
   interface Client {
-    city: string;
-    clientStatus: ClientStatus;
+    city?: string;
+    clientStatus?: ClientStatus;
     email: string;
     id: string;
     name: string;
-    state: string;
-    street: string;
-    street: string;
-    zip: string;
+    state?: string;
+    street?: string;
+    zip?: string;
   }
 }
 

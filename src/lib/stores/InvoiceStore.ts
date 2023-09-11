@@ -14,6 +14,17 @@ export const loadInvoices = (): void => {
 };
 
 /**
+ * Adds an invoice to the list of invoices.
+ *
+ * @param {Invoice} invoiceToAdd - The invoice to be added.
+ * @return {Invoice} - The added invoice.
+ */
+export const addInvoice = (invoiceToAdd: Invoice): Invoice => {
+  invoices.update((invoice) => [...invoice, invoiceToAdd]);
+  return invoiceToAdd;
+};
+
+/**
  * Deletes an invoice from the list of invoices.
  *
  * @param {Invoice} invoiceToDelete - The invoice to be deleted.
