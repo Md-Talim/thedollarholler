@@ -8,7 +8,7 @@
   import { slide } from 'svelte/transition';
   import { v4 as uuidv4 } from 'uuid';
   import LineItemRows from './LineItemRows.svelte';
-  import { addInvoice } from '$lib/stores/InvoiceStore';
+  import { addInvoice, updateInvoice } from '$lib/stores/InvoiceStore';
 
   export let closePanel: () => void = () => {};
 
@@ -20,7 +20,8 @@
   };
 
   let isNewClient: boolean = false;
-  let invoice: Invoice = {
+  export let formState: 'create' | 'edit' = 'create';
+  export let invoice: Invoice = {
     client: {} as Client,
     lineItems: [{ ...blankLineItem }] as LineItem[]
   } as Invoice;
@@ -45,7 +46,11 @@
       addClient(newClient as Client);
     }
 
-    addInvoice(invoice);
+    if (formState === 'create') {
+      addInvoice(invoice);
+    } else {
+      updateInvoice(invoice);
+    }
 
     closePanel();
   };
@@ -55,7 +60,9 @@
   });
 </script>
 
-<h2 class="mb-7 font-sansSerif text-3xl font-bold text-daisyBush">Add an Invoice</h2>
+<h2 class="mb-7 font-sansSerif text-3xl font-bold text-daisyBush">
+  {#if formState === 'create'} Add {:else} Edit {/if} an Invoice
+</h2>
 
 <form class="grid grid-cols-6 gap-x-5" on:submit|preventDefault={handleSubmit}>
   <!-- Client -->
@@ -73,6 +80,7 @@
             invoice.client.name = selectedClient?.name ?? '';
           }}
         >
+          <option />
           {#each $clients as client}
             <option value={client.id}>{client.name}</option>
           {/each}
@@ -210,13 +218,15 @@
   <!-- Buttons -->
   <div class="field col-span-2">
     <!-- Show only if editing -->
-    <Button
-      label="Delete"
-      style="textOnlyDestructive"
-      onClick={() => {}}
-      leftIcon={Trash}
-      isAnimated={false}
-    />
+    {#if formState === 'edit'}
+      <Button
+        label="Delete"
+        style="textOnlyDestructive"
+        onClick={() => {}}
+        leftIcon={Trash}
+        isAnimated={false}
+      />
+    {/if}
   </div>
 
   <div class="field col-span-4 flex justify-end gap-x-5">

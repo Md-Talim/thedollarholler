@@ -25,6 +25,19 @@ export const addInvoice = (invoiceToAdd: Invoice): Invoice => {
 };
 
 /**
+ * Updates an invoice in the system.
+ *
+ * @param {Invoice} invoiceToUpdate - The invoice object to update.
+ * @return {Invoice} The updated invoice.
+ */
+export const updateInvoice = (invoiceToUpdate: Invoice): Invoice => {
+  invoices.update((prev: Invoice[]) =>
+    prev.map((cur: Invoice) => (cur.id === invoiceToUpdate.id ? invoiceToUpdate : cur))
+  );
+  return invoiceToUpdate;
+};
+
+/**
  * Deletes an invoice from the list of invoices.
  *
  * @param {Invoice} invoiceToDelete - The invoice to be deleted.

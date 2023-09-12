@@ -1,19 +1,20 @@
 <script lang="ts">
-  import { AdditionalOptions, Button, Modal, Tag } from '$lib/components';
+  import { AdditionalOptions, Button, Modal, SlidePanel, Tag } from '$lib/components';
   import { Edit, Send, ThreeDots, Trash, View } from '$lib/components/Icons';
   import { deleteInvoice } from '$lib/stores/InvoiceStore';
   import { convertDateFormat, isLate } from '$lib/utils/dateHelpers';
   import { centsToDollars, sumLineItems } from '$lib/utils/moneyHelpers';
+  import InvoiceForm from './InvoiceForm.svelte';
 
   export let invoice: Invoice;
-  let isAdditionalOptionsShowing = false;
-  let isOptionsDisabled = false;
+  let isAdditionalOptionsShowing: boolean = false;
+  let isOptionsDisabled: boolean = false;
   let isModalShowing: boolean = false;
-
-  const amount = centsToDollars(sumLineItems(invoice.lineItems));
+  let isInvoiceFormShowing: boolean = false;
 
   const handleEdit = () => {
-    console.log('editing...');
+    isInvoiceFormShowing = true;
+    isAdditionalOptionsShowing = false;
   };
   const handleDelete = () => {
     isModalShowing = true;
@@ -48,7 +49,7 @@
     {invoice.client.name}
   </div>
   <div class="amount text-right font-mono text-sm font-bold lg:text-lg">
-    ${amount}
+    ${centsToDollars(sumLineItems(invoice.lineItems))}
   </div>
   <div class="view-button lg:center hidden text-sm md:text-lg">
     <a href="/" class="text-pastelPurple hover:text-daisyBush"><View /></a>
@@ -104,6 +105,13 @@
     </div>
   </div>
 </Modal>
+
+<!-- Slide Panel -->
+{#if isInvoiceFormShowing}
+  <SlidePanel on:close={() => (isInvoiceFormShowing = false)}>
+    <InvoiceForm {invoice} formState="edit" closePanel={() => (isInvoiceFormShowing = false)} />
+  </SlidePanel>
+{/if}
 
 <style lang="postcss">
   .invoice-row {
