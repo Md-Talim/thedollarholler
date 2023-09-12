@@ -9,6 +9,7 @@
   import { v4 as uuidv4 } from 'uuid';
   import LineItemRows from './LineItemRows.svelte';
   import { addInvoice, updateInvoice } from '$lib/stores/InvoiceStore';
+  import ConfirmDelete from './ConfirmDelete.svelte';
 
   export let closePanel: () => void = () => {};
 
@@ -19,6 +20,7 @@
     amount: 0
   };
 
+  let isModalShowing: boolean = false;
   let isNewClient: boolean = false;
   export let formState: 'create' | 'edit' = 'create';
   export let invoice: Invoice = {
@@ -222,7 +224,9 @@
       <Button
         label="Delete"
         style="textOnlyDestructive"
-        onClick={() => {}}
+        onClick={() => {
+          isModalShowing = true;
+        }}
         leftIcon={Trash}
         isAnimated={false}
       />
@@ -245,3 +249,12 @@
     </button>
   </div>
 </form>
+
+<ConfirmDelete
+  {invoice}
+  {isModalShowing}
+  on:close={() => {
+    isModalShowing = false;
+    closePanel();
+  }}
+/>
