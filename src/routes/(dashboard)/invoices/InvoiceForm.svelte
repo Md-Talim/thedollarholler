@@ -1,15 +1,15 @@
 <script lang="ts">
   import { Button } from '$lib/components';
   import { Trash } from '$lib/components/Icons';
+  import { addInvoice, updateInvoice } from '$lib/stores/InvoiceStore';
   import { addClient, clients, loadClients } from '$lib/stores/clientStore';
   import { today } from '$lib/utils/dateHelpers';
   import states from '$lib/utils/states';
   import { onMount } from 'svelte';
   import { slide } from 'svelte/transition';
   import { v4 as uuidv4 } from 'uuid';
-  import LineItemRows from './LineItemRows.svelte';
-  import { addInvoice, updateInvoice } from '$lib/stores/InvoiceStore';
   import ConfirmDelete from './ConfirmDelete.svelte';
+  import LineItemRows from './LineItemRows.svelte';
 
   export let closePanel: () => void = () => {};
 
@@ -28,6 +28,10 @@
     lineItems: [{ ...blankLineItem }] as LineItem[]
   } as Invoice;
   let newClient: Partial<Client> = {};
+
+  const UpdateDiscount = (event: CustomEvent) => {
+    invoice.discount = event.detail.discount;
+  };
 
   const AddLineItem = () => {
     invoice.lineItems = [...(invoice.lineItems as []), { ...blankLineItem, id: uuidv4() }];
@@ -191,10 +195,12 @@
   <!-- Line Items -->
   <div class="field col-span-6">
     <LineItemRows
+      discount={invoice.discount}
       lineItems={invoice.lineItems}
       on:addlineItem={AddLineItem}
       on:removeLineItem={RemoveLineItem}
       on:updateLineItems={UpdateLineItems}
+      on:updateDiscount={UpdateDiscount}
     />
   </div>
 

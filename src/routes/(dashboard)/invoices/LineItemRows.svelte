@@ -7,7 +7,7 @@
   export let lineItems: LineItem[] | undefined = undefined;
   const dispatch = createEventDispatcher();
 
-  let discount: number;
+  export let discount: number = 0;
   let discountedAmount: string = '0.00';
   let subtotal: string = '0.00';
   let total: string = '0.00';
@@ -65,6 +65,7 @@
       min="0"
       max="100"
       bind:value={discount}
+      on:change={() => dispatch('updateDiscount', { discount })}
     />
     <span class="absolute right-0 top-2 font-mono">%</span>
   </div>

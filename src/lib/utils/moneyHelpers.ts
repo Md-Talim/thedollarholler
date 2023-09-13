@@ -59,3 +59,24 @@ export const sumInvoices = (invoices: Invoice[]): number => {
     return prevValue + sumInvoice;
   }, 0);
 };
+
+/**
+ * Calculates the total amount of an invoice.
+ *
+ * @param {LineItem[] | undefined} lineItems - The line items of the invoice.
+ * @param {number | undefined} discount - The discount percentage applied to the invoice.
+ * @return {number} The total amount of the invoice.
+ */
+export const invoiceTotal = (
+  lineItems: LineItem[] | undefined,
+  discount: number | undefined
+): number => {
+  const lineItemsSum = sumLineItems(lineItems);
+
+  if (discount) {
+    const invoiceDiscount = lineItemsSum * (discount / 100);
+    return lineItemsSum - invoiceDiscount;
+  }
+
+  return lineItemsSum;
+};
