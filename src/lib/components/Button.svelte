@@ -27,11 +27,15 @@
   class:textOnlyDestructive={style === 'textOnlyDestructive'}
 >
   {#if leftIcon}
-    <svelte:component this={leftIcon} class="mr-2" />
+    <div class="mr-2">
+      <svelte:component this={leftIcon} />
+    </div>
   {/if}
   {label}
   {#if rightIcon}
-    <svelte:component this={leftIcon} class="ml-2" />
+    <div class="ml-2">
+      <svelte:component this={leftIcon} />
+    </div>
   {/if}
 </button>
 
