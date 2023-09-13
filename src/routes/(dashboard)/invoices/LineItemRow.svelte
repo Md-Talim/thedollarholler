@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Trash } from '$lib/components/Icons';
-  import { dollarsToCents, twoDecimals } from '$lib/utils/moneyHelpers';
+  import { centsToDollars, dollarsToCents, twoDecimals } from '$lib/utils/moneyHelpers';
   import { createEventDispatcher } from 'svelte';
 
   export let canDelete: boolean = false;
@@ -8,8 +8,8 @@
   export let isRequired: boolean;
   const dispatch = createEventDispatcher();
 
-  let unitPrice: string = twoDecimals(lineItem.amount / lineItem.quantity);
-  let amount: string = twoDecimals(lineItem.amount);
+  let unitPrice: string = centsToDollars(lineItem.amount / lineItem.quantity);
+  let amount: string = centsToDollars(lineItem.amount);
 
   $: {
     amount = twoDecimals(lineItem.quantity * Number(unitPrice));
