@@ -18,7 +18,8 @@
 </script>
 
 <div class="invoice-line-item border-b-2 border-fog py-2">
-  <div>
+  <div class="description">
+    <label for="description" class="line-item-label">Description</label>
     <input
       class="line-item"
       type="text"
@@ -28,7 +29,8 @@
     />
   </div>
 
-  <div>
+  <div class="unitPrice">
+    <label for="unitPrice" class="line-item-label text-right">Unit Price</label>
     <input
       class="line-item text-right"
       type="number"
@@ -44,7 +46,8 @@
     />
   </div>
 
-  <div>
+  <div class="quantity">
+    <label for="quantity" class="line-item-label text-center">Qty</label>
     <input
       class="line-item text-center"
       type="number"
@@ -59,6 +62,7 @@
   </div>
 
   <div>
+    <label for="amount" class="line-item-label text-right">Amount</label>
     <input
       class="line-item text-right"
       type="number"
@@ -73,7 +77,7 @@
   <div>
     {#if canDelete}
       <button
-        class="center h-10 w-10 text-pastelPurple hover:text-lavenderIndigo"
+        class="center trash h-10 w-10 text-pastelPurple hover:text-lavenderIndigo"
         on:click|preventDefault={() => dispatch('removeLineItem', lineItem.id)}><Trash /></button
       >
     {/if}
@@ -102,5 +106,9 @@
   input[type='text']:disabled,
   input[type='number']:disabled {
     @apply border-b-0 bg-transparent px-0;
+  }
+
+  .line-item-label {
+    @apply block sm:hidden;
   }
 </style>
