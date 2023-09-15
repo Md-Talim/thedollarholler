@@ -21,7 +21,7 @@
   $: total = twoDecimals(Number(subtotal) - Number(discountedAmount));
 </script>
 
-<div class="invoice-line-item hidden border-b-2 border-daisyBush pb-2 sm:block">
+<div class="invoice-line-item border-b-2 border-daisyBush pb-2">
   <div class="table-header">Description</div>
   <div class="table-header text-right">Unit Price</div>
   <div class="table-header text-center">Qty</div>
@@ -80,6 +80,6 @@
 
 <style lang="postcss">
   .table-header {
-    @apply text-sm font-bold text-daisyBush;
+    @apply hidden text-sm font-bold text-daisyBush sm:block;
   }
 </style>

@@ -73,11 +73,12 @@
 
   .invoice-line-item .trash {
     @apply absolute right-0 top-0 sm:relative;
+    grid-area: trash;
   }
 
   @media (min-width: 640px) {
     .invoice-line-item {
-      grid-template-areas: 'description unitPrice quantity amount';
+      grid-template-areas: 'description unitPrice quantity amount trash';
     }
   }
 

@@ -61,7 +61,7 @@
     />
   </div>
 
-  <div>
+  <div class="amount">
     <label for="amount" class="line-item-label text-right">Amount</label>
     <input
       class="line-item text-right"
@@ -74,10 +74,10 @@
     />
   </div>
 
-  <div>
+  <div class="trash">
     {#if canDelete}
       <button
-        class="center trash h-10 w-10 text-pastelPurple hover:text-lavenderIndigo"
+        class="center h-10 w-10 text-pastelPurple hover:text-lavenderIndigo"
         on:click|preventDefault={() => dispatch('removeLineItem', lineItem.id)}><Trash /></button
       >
     {/if}
