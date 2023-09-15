@@ -3,6 +3,7 @@
   import { Modal, Button } from '$lib/components';
   import { deleteInvoice } from '$lib/stores/InvoiceStore';
   import { centsToDollars, sumLineItems } from '$lib/utils/moneyHelpers';
+  import { snackbar } from '$lib/stores/SnackbarStore';
 
   export let isModalShowing: boolean = false;
   export let invoice: Invoice;
@@ -34,6 +35,10 @@
         isAnimated={false}
         onClick={() => {
           deleteInvoice(invoice);
+          snackbar.send({
+            message: 'Your invoice has been deleted.',
+            type: 'success'
+          });
           dispatch('close');
         }}
         style="destructive"
