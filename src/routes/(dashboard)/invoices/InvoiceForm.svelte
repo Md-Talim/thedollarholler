@@ -10,6 +10,7 @@
   import { v4 as uuidv4 } from 'uuid';
   import ConfirmDelete from './ConfirmDelete.svelte';
   import LineItemRows from './LineItemRows.svelte';
+  import { snackbar } from '$lib/stores/SnackbarStore';
 
   export let closePanel: () => void = () => {};
 
@@ -54,8 +55,16 @@
 
     if (formState === 'create') {
       addInvoice(invoice);
+      snackbar.send({
+        message: 'Your invoice has been created.',
+        type: 'success'
+      });
     } else {
       updateInvoice(invoice);
+      snackbar.send({
+        message: 'Your invoice has been updated.',
+        type: 'success'
+      });
     }
 
     closePanel();

@@ -41,6 +41,7 @@ module.exports = {
         whisper: '#f9f4f9'
       },
       zIndex: {
+        toaster: 1000,
         modal: 999,
         modalOverlay: 998,
         slidePanel: 997,

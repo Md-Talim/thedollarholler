@@ -33,6 +33,14 @@ declare global {
     street?: string;
     zip?: string;
   }
+
+  type NotificationType = 'success' | 'error' | 'warning' | 'info';
+
+  interface Snackbar {
+    id: string;
+    message: string;
+    type: NotificationType;
+  }
 }
 
 export {};
