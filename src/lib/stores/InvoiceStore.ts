@@ -9,7 +9,7 @@ export const invoices = writable<Invoice[]>([]);
  * @return {void} - No return value.
  */
 export const loadInvoices = (): void => {
-  invoices.set(data.invoices);
+  invoices.set(data.invoices as Invoice[]);
   // invoices.set([]);
 };
 
@@ -49,5 +49,5 @@ export const deleteInvoice = (invoiceToDelete: Invoice): Invoice => {
 };
 
 export const getInvoiceById = (id: string) => {
-  return data.invoices.find((invoice: Invoice) => invoice.id === id);
+  return data.invoices.find((invoice) => invoice.id === id);
 };

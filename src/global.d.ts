@@ -1,6 +1,7 @@
-import type { ClientStatus, InvoiceStatus } from './enums';
-
 declare global {
+  type InvoiceStatus = 'draft' | 'sent' | 'paid';
+  type ClientStatus = 'active' | 'archieved';
+
   interface Invoice {
     client: Client;
     createdAt: string;
