@@ -8,6 +8,7 @@
     | 'outline'
     | 'textOnly'
     | 'textOnlyDestructive' = 'primary';
+  export let height: 'short' | 'regular' = 'regular';
   export let isAnimated = true;
   export let label: string;
   export let onClick: () => void;
@@ -25,6 +26,7 @@
   class:outline={style === 'outline'}
   class:textOnly={style === 'textOnly'}
   class:textOnlyDestructive={style === 'textOnlyDestructive'}
+  class:short={height === 'short'}
 >
   {#if leftIcon}
     <div class="mr-2">
@@ -53,12 +55,15 @@
     @apply bg-scarlet text-goldenFizz;
   }
   .outline {
-    @apply border-daisyBush text-daisyBush hover:border hover:border-daisyBush hover:bg-daisyBush hover:text-white;
+    @apply border-daisyBush text-daisyBush  hover:border-daisyBush hover:bg-daisyBush hover:text-white;
   }
   .textOnly {
     @apply bg-transparent px-0 text-lavenderIndigo no-underline hover:underline;
   }
   .textOnlyDestructive {
     @apply bg-transparent px-0 text-scarlet underline hover:no-underline;
+  }
+  .short {
+    @apply !py-1;
   }
 </style>
