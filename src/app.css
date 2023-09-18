@@ -30,6 +30,12 @@
     @apply border-2 border-lavenderIndigo outline-none;
   }
 
+  input[type='number']:disabled {
+    @apply appearance-none;
+    -moz-appearance: textfield;
+    appearance: none;
+  }
+
   textarea {
     @apply block h-32 w-full rounded-lg border-2 border-silver p-4 font-sansSerif text-base;
   }

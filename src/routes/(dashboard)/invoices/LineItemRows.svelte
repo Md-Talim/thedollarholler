@@ -5,6 +5,7 @@
   import LineItemRow from './LineItemRow.svelte';
 
   export let lineItems: LineItem[] | undefined = undefined;
+  export let isEditable: boolean = true;
   const dispatch = createEventDispatcher();
 
   export let discount: number = 0;
@@ -36,20 +37,23 @@
       canDelete={index > 0}
       on:updateLineItems
       isRequired={index === 0}
+      {isEditable}
     />
   {/each}
 {/if}
 
 <div class="invoice-line-item">
   <div class="col-span-1 sm:col-span-2">
-    <Button
-      label="+ Line Item"
-      onClick={() => {
-        dispatch('addlineItem');
-      }}
-      style="textOnly"
-      isAnimated={false}
-    />
+    {#if isEditable}
+      <Button
+        label="+ Line Item"
+        onClick={() => {
+          dispatch('addlineItem');
+        }}
+        style="textOnly"
+        isAnimated={false}
+      />
+    {/if}
   </div>
   <div class="py-5 text-right font-bold text-monsoon">Subtotal</div>
   <div class="py-5 text-right font-mono">${subtotal}</div>
@@ -64,6 +68,7 @@
       name="discount"
       min="0"
       max="100"
+      disabled={!isEditable}
       bind:value={discount}
       on:change={() => dispatch('updateDiscount', { discount })}
     />

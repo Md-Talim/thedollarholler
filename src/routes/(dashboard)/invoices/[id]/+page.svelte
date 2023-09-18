@@ -1,5 +1,10 @@
 <script lang="ts">
   import Button from '$lib/components/Button.svelte';
+  import { convertDateFormat } from '$lib/utils/dateHelpers';
+  import LineItemRows from '../LineItemRows.svelte';
+
+  export let data: { invoice: Invoice };
+  const { invoice } = data;
 
   const printInvoice = () => {
     console.log('Print Invoice.');
@@ -54,46 +59,55 @@
   <div class="col-span-3">
     <div class="label">Bill To:</div>
     <p>
-      <strong>ZEAL</strong><br />
-      zeal@example.com<br />
-      789 Stellar Street<br />
-      Anywhere, USA 56789
+      <strong>{invoice.client.name}</strong><br />
+      {invoice.client.email}<br />
+      {invoice.client.street}<br />
+      {invoice.client.city}, {invoice.client.state}
+      {invoice.client.zip}
     </p>
   </div>
 
   <div class="col-span-2 col-start-5">
     <div class="label">Invoice Id</div>
-    <p>1234</p>
+    <p>{invoice.invoiceNumber}</p>
   </div>
 
   <div class="col-span-3">
     <div class="label">Due Date</div>
-    <p>10 / 6 / 2022</p>
+    <p>{convertDateFormat(invoice.dueDate)}</p>
   </div>
 
   <div class="col-span-2 col-start-5">
     <div class="label">Issue Date</div>
-    <p>10 / 4 / 2022</p>
+    <p>{convertDateFormat(invoice.issueDate)}</p>
   </div>
 
   <div class="col-span-6">
     <div class="label">Subject</div>
-    <p>Website</p>
+    <p>{invoice.subject}</p>
   </div>
 
   <div class="col-span-6">
-    <!-- Line Items -->
+    <LineItemRows
+      lineItems={invoice.lineItems}
+      isEditable={false}
+      discount={invoice?.discount || 0}
+    />
   </div>
 
-  <div class="col-span-6">
-    <div class="label">Notes</div>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fuga, odit!</p>
-  </div>
+  {#if invoice.notes}
+    <div class="col-span-6">
+      <div class="label">Notes</div>
+      <p>{invoice.notes}</p>
+    </div>
+  {/if}
 
-  <div class="col-span-6">
-    <div class="label">Terms & Coditions</div>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fuga, odit!</p>
-  </div>
+  {#if invoice.terms}
+    <div class="col-span-6">
+      <div class="label">Terms & Coditions</div>
+      <p>{invoice.terms}</p>
+    </div>
+  {/if}
 </div>
 
 <style lang="postcss">
