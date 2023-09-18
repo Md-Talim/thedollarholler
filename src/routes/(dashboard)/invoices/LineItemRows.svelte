@@ -1,6 +1,11 @@
 <script lang="ts">
   import { Button, CircledAmount } from '$lib/components';
-  import { centsToDollars, sumLineItems, twoDecimals } from '$lib/utils/moneyHelpers';
+  import {
+    addThousandSeparator,
+    centsToDollars,
+    sumLineItems,
+    twoDecimals
+  } from '$lib/utils/moneyHelpers';
   import { createEventDispatcher } from 'svelte';
   import LineItemRow from './LineItemRow.svelte';
 
@@ -19,7 +24,10 @@
   $: if (subtotal && discount) {
     discountedAmount = centsToDollars(sumLineItems(lineItems) * (discount / 100));
   }
-  $: total = twoDecimals(Number(subtotal) - Number(discountedAmount));
+  $: {
+    const plainSubtotal = subtotal.replace(',', '');
+    total = addThousandSeparator(twoDecimals(Number(plainSubtotal) - Number(discountedAmount)));
+  }
 </script>
 
 <div class="invoice-line-item border-b-2 border-daisyBush pb-2">

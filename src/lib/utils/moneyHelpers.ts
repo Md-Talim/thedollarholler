@@ -38,6 +38,11 @@ export const centsToDollars = (cents: number): string => {
   return addThousandSeparator(decimaledDollars);
 };
 
+export const centsToDollarsWithoutCommas = (cents: number): string => {
+  const dollars = cents / 100;
+  return twoDecimals(dollars);
+};
+
 /**
  * Converts a dollar amount to cents.
  *
