@@ -2,6 +2,7 @@
   import Button from '$lib/components/Button.svelte';
   import { convertDateFormat } from '$lib/utils/dateHelpers';
   import LineItemRows from '../LineItemRows.svelte';
+  import { settings, loadSettings } from '$lib/stores/SettingsStore';
 
   export let data: { invoice: Invoice };
   const { invoice } = data;
@@ -18,6 +19,8 @@
   const payInvoice = () => {
     console.log('Pay Invoice');
   };
+
+  $: loadSettings();
 </script>
 
 <div class="fixed z-0 flex w-full max-w-screen-lg justify-between">
@@ -48,12 +51,22 @@
   </div>
 
   <div class="col-span-2 col-start-5 pt-4">
-    <div class="label">From</div>
-    <p>
-      Amy Dutton<br />
-      123 Awesome Street<br />
-      Coolville TN 54321
-    </p>
+    {#if $settings && $settings.myName}
+      <div class="label">From</div>
+      <p>
+        {$settings.myName}<br />
+        {$settings.email}<br />
+        {$settings.street}<br />
+        {$settings.city}, {$settings.state}
+        {$settings.zip}
+      </p>
+    {:else}
+      <div class="center min-h-[68px] rounded-lg bg-gallery">
+        <a href="/" class="text-stone-600 underline hover:no-underline">
+          Add your contact information
+        </a>
+      </div>
+    {/if}
   </div>
 
   <div class="col-span-3">

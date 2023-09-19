@@ -182,5 +182,13 @@
       ],
       "subject": "Website"
     }
-  ]
+  ],
+  "settings": {
+    "myName": "Mohd Talim",
+    "email": "md.talim@skiff.com",
+    "street": "214 Madalpur",
+    "city": "Faridabad",
+    "state": "Haryana",
+    "zip": "121006"
+  }
 }
