@@ -3,6 +3,7 @@
   import { convertDateFormat } from '$lib/utils/dateHelpers';
   import LineItemRows from '../LineItemRows.svelte';
   import { settings, loadSettings } from '$lib/stores/SettingsStore';
+  import SvelteMarkdown from 'svelte-markdown';
 
   export let data: { invoice: Invoice };
   const { invoice } = data;
@@ -111,14 +112,14 @@
   {#if invoice.notes}
     <div class="col-span-6">
       <div class="label">Notes</div>
-      <p>{invoice.notes}</p>
+      <SvelteMarkdown source={invoice.notes} />
     </div>
   {/if}
 
   {#if invoice.terms}
     <div class="col-span-6">
       <div class="label">Terms & Coditions</div>
-      <p>{invoice.terms}</p>
+      <SvelteMarkdown source={invoice.terms} />
     </div>
   {/if}
 </div>
