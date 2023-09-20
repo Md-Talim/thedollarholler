@@ -9,7 +9,7 @@
   const { invoice } = data;
 
   const printInvoice = () => {
-    console.log('Print Invoice.');
+    window.print();
   };
   const copyLink = () => {
     console.log('Copy Invoice.');
