@@ -17,11 +17,11 @@
   }}
 />
 
-<div class="h-full min-h-screen w-screen bg-whisper pb-32 pt-12">
+<div class="h-full min-h-screen bg-whisper pb-32 pt-16 lg:pt-12">
   <main class="min-h-scree mx-auto max-w-screen-lg">
     <a
       href={previousPage ? previousPage : '/invoices'}
-      class="absolute left-7 top-7 text-pastelPurple"
+      class="fixed left-7 top-7 text-pastelPurple"
     >
       <Arrow />
     </a>

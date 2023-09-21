@@ -31,9 +31,11 @@
   $: loadSettings();
 </script>
 
-<div class="fixed z-0 flex w-full max-w-screen-lg justify-between">
+<div
+  class="fixed z-0 flex w-full max-w-screen-lg flex-col justify-between gap-y-5 px-4 md:flex-row"
+>
   <h1 class="text-3xl font-bold text-daisyBush">Invoice</h1>
-  <div class="flex items-center gap-4">
+  <div class="flex flex-wrap items-center gap-2 sm:gap-4">
     <Button
       height="short"
       label="Print"
@@ -45,7 +47,7 @@
       height="short"
       label={copyLinkLable}
       onClick={copyLink}
-      className="min-w-[168px] justify-center"
+      className="min-w-[100px] sm:min-w-[168px] justify-center"
     />
     <Button height="short" label="Send" onClick={sendInvoice} />
     <Button height="short" label="Pay Invoice" onClick={payInvoice} />
@@ -53,9 +55,9 @@
 </div>
 
 <div
-  class="relative top-32 z-10 grid grid-cols-6 gap-x-5 gap-y-8 bg-white px-16 py-32 shadow-invoice"
+  class="relative top-32 z-10 grid grid-cols-6 gap-x-5 gap-y-8 bg-white px-4 py-8 shadow-invoice md:px-16 md:py-32"
 >
-  <div class="col-span-3">
+  <div class="col-span-6 sm:col-span-3">
     <img
       src="/images/logo.png"
       srcset="/images/logo@2x.png 2x, /images/logo.png 1x"
@@ -63,7 +65,7 @@
     />
   </div>
 
-  <div class="col-span-2 col-start-5 pt-4">
+  <div class="col-span-6 pt-4 sm:col-span-2 sm:col-start-5">
     {#if $settings && $settings.myName}
       <div class="label">From</div>
       <p>
