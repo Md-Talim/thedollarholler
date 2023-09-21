@@ -4,15 +4,22 @@
   import LineItemRows from '../LineItemRows.svelte';
   import { settings, loadSettings } from '$lib/stores/SettingsStore';
   import SvelteMarkdown from 'svelte-markdown';
+  import { page } from '$app/stores';
 
   export let data: { invoice: Invoice };
   const { invoice } = data;
+  let copyLinkLable = 'Copy Link';
 
   const printInvoice = () => {
     window.print();
   };
   const copyLink = () => {
-    console.log('Copy Invoice.');
+    navigator.clipboard.writeText($page.url.href);
+    copyLinkLable = 'Copied!';
+
+    setTimeout(() => {
+      copyLinkLable = 'Copy Link';
+    }, 1250);
   };
   const sendInvoice = () => {
     console.log('Send Invoice.');
@@ -34,7 +41,12 @@
       style="outline"
       isAnimated={false}
     />
-    <Button height="short" label="Copy Link" onClick={copyLink} />
+    <Button
+      height="short"
+      label={copyLinkLable}
+      onClick={copyLink}
+      className="min-w-[168px] justify-center"
+    />
     <Button height="short" label="Send" onClick={sendInvoice} />
     <Button height="short" label="Pay Invoice" onClick={payInvoice} />
   </div>

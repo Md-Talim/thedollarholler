@@ -8,6 +8,7 @@
     | 'outline'
     | 'textOnly'
     | 'textOnlyDestructive' = 'primary';
+  export let className: string = '';
   export let height: 'short' | 'regular' = 'regular';
   export let isAnimated = true;
   export let label: string;
@@ -18,7 +19,7 @@
 
 <button
   on:click|preventDefault={() => onClick()}
-  class="button"
+  class={`button ${className}`}
   class:isAnimated
   class:primary={style === 'primary'}
   class:secondary={style === 'secondary'}
