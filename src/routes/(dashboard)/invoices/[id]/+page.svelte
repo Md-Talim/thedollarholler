@@ -32,7 +32,7 @@
 </script>
 
 <div
-  class="fixed z-0 flex w-full max-w-screen-lg flex-col justify-between gap-y-5 px-4 md:flex-row"
+  class="fixed z-0 flex w-full max-w-screen-lg flex-col justify-between gap-y-5 px-4 print:hidden md:flex-row"
 >
   <h1 class="text-3xl font-bold text-daisyBush">Invoice</h1>
   <div class="flex flex-wrap items-center gap-2 sm:gap-4">
@@ -55,9 +55,9 @@
 </div>
 
 <div
-  class="relative top-32 z-10 grid grid-cols-6 gap-x-5 gap-y-8 bg-white px-4 py-8 shadow-invoice md:px-16 md:py-32"
+  class="print:shadown-none relative top-32 z-10 grid grid-cols-6 gap-x-5 gap-y-8 bg-white px-4 py-8 shadow-invoice print:top-0 md:px-16 md:py-32"
 >
-  <div class="col-span-6 sm:col-span-3">
+  <div class="col-span-6 print:col-span-3 sm:col-span-3">
     <img
       src="/images/logo.png"
       srcset="/images/logo@2x.png 2x, /images/logo.png 1x"
@@ -65,7 +65,7 @@
     />
   </div>
 
-  <div class="col-span-6 pt-4 sm:col-span-2 sm:col-start-5">
+  <div class="col-span-6 pt-4 print:col-span-3 sm:col-span-2 sm:col-start-5">
     {#if $settings && $settings.myName}
       <div class="label">From</div>
       <p>
@@ -84,7 +84,7 @@
     {/if}
   </div>
 
-  <div class="col-span-3">
+  <div class="col-span-6 print:col-span-3 sm:col-span-3">
     <div class="label">Bill To:</div>
     <p>
       <strong>{invoice.client.name}</strong><br />
@@ -95,7 +95,7 @@
     </p>
   </div>
 
-  <div class="col-span-2 col-start-5">
+  <div class="col-span-6 sm:col-span-2 sm:col-start-5">
     <div class="label">Invoice Id</div>
     <p>{invoice.invoiceNumber}</p>
   </div>
@@ -105,7 +105,7 @@
     <p>{convertDateFormat(invoice.dueDate)}</p>
   </div>
 
-  <div class="col-span-2 col-start-5">
+  <div class="col-span-3 sm:col-span-2 sm:col-start-5">
     <div class="label">Issue Date</div>
     <p>{convertDateFormat(invoice.issueDate)}</p>
   </div>
