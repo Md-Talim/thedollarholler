@@ -5,6 +5,7 @@
   import { settings, loadSettings } from '$lib/stores/SettingsStore';
   import SvelteMarkdown from 'svelte-markdown';
   import { page } from '$app/stores';
+  import { onMount } from 'svelte';
 
   export let data: { invoice: Invoice };
   const { invoice } = data;
@@ -28,7 +29,9 @@
     console.log('Pay Invoice');
   };
 
-  $: loadSettings();
+  onMount(() => {
+    loadSettings();
+  });
 </script>
 
 <div
