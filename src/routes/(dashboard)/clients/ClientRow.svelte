@@ -1,6 +1,6 @@
 <script lang="ts">
   import Activate from '$lib/components/Icons/Activate.svelte';
-  import Archieve from '$lib/components/Icons/Archieve.svelte';
+  import Archive from '$lib/components/Icons/Archive.svelte';
   import { AdditionalOptions, Tag } from '$lib/components';
   import { Edit, ThreeDots, Trash, View } from '$lib/components/Icons';
 
@@ -47,13 +47,13 @@
             disabled: client.clientStatus === 'active'
           },
           {
-            text: 'Archieve',
-            icon: Archieve,
+            text: 'archive',
+            icon: Archive,
             onClick: () => {
-              client.clientStatus = 'archieve';
+              client.clientStatus = 'archive';
               isAdditionalOptionsShowing = false;
             },
-            disabled: client.clientStatus === 'archieve'
+            disabled: client.clientStatus === 'archive'
           },
           {
             text: 'Delete',

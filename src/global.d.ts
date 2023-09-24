@@ -1,6 +1,6 @@
 declare global {
   type InvoiceStatus = 'draft' | 'sent' | 'paid';
-  type ClientStatus = 'active' | 'archieve';
+  type ClientStatus = 'active' | 'archive';
 
   interface Invoice {
     client: Client;

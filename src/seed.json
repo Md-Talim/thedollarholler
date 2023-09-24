@@ -13,7 +13,7 @@
     {
       "address": "456 Drive",
       "city": "Nowhere",
-      "clientStatus": "archieve",
+      "clientStatus": "archive",
       "email": "everythingsvelte@test.com",
       "id": "2",
       "name": "Everything Svelte",
