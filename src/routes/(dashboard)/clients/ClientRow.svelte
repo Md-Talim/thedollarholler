@@ -1,8 +1,6 @@
 <script lang="ts">
-  import Activate from '$lib/components/Icons/Activate.svelte';
-  import Archive from '$lib/components/Icons/Archive.svelte';
   import { AdditionalOptions, Tag } from '$lib/components';
-  import { Edit, ThreeDots, Trash, View } from '$lib/components/Icons';
+  import { Activate, Archive, Edit, ThreeDots, Trash, View } from '$lib/components/Icons';
 
   export let client: Client;
 

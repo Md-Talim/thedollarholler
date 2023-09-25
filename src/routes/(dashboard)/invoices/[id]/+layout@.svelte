@@ -1,6 +1,6 @@
 <script lang="ts">
   import { afterNavigate, goto } from '$app/navigation';
-  import Arrow from '$lib/components/Icons/Arrow.svelte';
+  import { Arrow } from '$lib/components/Icons';
 
   let previousPage: string | undefined = undefined;
 

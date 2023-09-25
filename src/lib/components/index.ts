@@ -8,6 +8,8 @@ import Overlay from './Overlay.svelte';
 import Portal from './Portal.svelte';
 import Search from './Search.svelte';
 import SlidePanel from './SlidePanel.svelte';
+import Snackbar from './Snackbar.svelte';
+import SnackbarMessage from './SnackbarMessage.svelte';
 import Tag from './Tag.svelte';
 
 export {
@@ -21,5 +23,7 @@ export {
   Portal,
   Search,
   SlidePanel,
+  Snackbar,
+  SnackbarMessage,
   Tag
 };

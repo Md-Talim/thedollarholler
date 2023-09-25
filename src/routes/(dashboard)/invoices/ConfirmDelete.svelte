@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
-  import { Modal, Button } from '$lib/components';
+  import { Button, Modal } from '$lib/components';
   import { deleteInvoice } from '$lib/stores/InvoiceStore';
-  import { centsToDollars, sumLineItems } from '$lib/utils/moneyHelpers';
   import { snackbar } from '$lib/stores/SnackbarStore';
+  import { centsToDollars, sumLineItems } from '$lib/utils/moneyHelpers';
+  import { createEventDispatcher } from 'svelte';
 
   export let isModalShowing: boolean = false;
   export let invoice: Invoice;

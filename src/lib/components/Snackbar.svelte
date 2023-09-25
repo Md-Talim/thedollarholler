@@ -1,10 +1,9 @@
 <script lang="ts">
-  import { fly, fade } from 'svelte/transition';
-  import { flip } from 'svelte/animate';
-  import Cancel from './Icons/Cancel.svelte';
-  import Portal from './Portal.svelte';
-  import SnackbarMessage from './SnackbarMessage.svelte';
   import { snackbar } from '$lib/stores/SnackbarStore';
+  import { flip } from 'svelte/animate';
+  import { fade, fly } from 'svelte/transition';
+  import { Portal, SnackbarMessage } from './';
+  import { Cancel } from './Icons';
 </script>
 
 <Portal>

@@ -4,9 +4,9 @@
   import { centsToDollars, sumInvoices } from '$lib/utils/moneyHelpers';
   import { onMount } from 'svelte';
   import BlankState from './BlankState.svelte';
+  import InvoiceForm from './InvoiceForm.svelte';
   import InvoiceRow from './InvoiceRow.svelte';
   import InvoiceRowHeader from './InvoiceRowHeader.svelte';
-  import InvoiceForm from './InvoiceForm.svelte';
 
   let isInvoiceFormShowing: boolean = false;
 

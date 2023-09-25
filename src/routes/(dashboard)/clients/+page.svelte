@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { Search, Button } from '$lib/components';
-  import ClientRow from './ClientRow.svelte';
-  import ClientRowHeader from './ClientRowHeader.svelte';
+  import { Button, Search } from '$lib/components';
   import { clients, loadClients } from '$lib/stores/clientStore';
   import { onMount } from 'svelte';
+  import ClientRow from './ClientRow.svelte';
+  import ClientRowHeader from './ClientRowHeader.svelte';
 
   onMount(() => {
     loadClients();

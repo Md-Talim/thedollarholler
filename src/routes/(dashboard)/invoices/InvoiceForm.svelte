@@ -2,6 +2,7 @@
   import { Button } from '$lib/components';
   import { Trash } from '$lib/components/Icons';
   import { addInvoice, updateInvoice } from '$lib/stores/InvoiceStore';
+  import { snackbar } from '$lib/stores/SnackbarStore';
   import { addClient, clients, loadClients } from '$lib/stores/clientStore';
   import { today } from '$lib/utils/dateHelpers';
   import states from '$lib/utils/states';
@@ -10,7 +11,6 @@
   import { v4 as uuidv4 } from 'uuid';
   import ConfirmDelete from './ConfirmDelete.svelte';
   import LineItemRows from './LineItemRows.svelte';
-  import { snackbar } from '$lib/stores/SnackbarStore';
 
   export let closePanel: () => void = () => {};
 
