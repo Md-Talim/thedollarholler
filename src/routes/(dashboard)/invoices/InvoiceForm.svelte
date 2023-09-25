@@ -3,7 +3,7 @@
   import { Trash } from '$lib/components/Icons';
   import { addInvoice, updateInvoice } from '$lib/stores/InvoiceStore';
   import { snackbar } from '$lib/stores/SnackbarStore';
-  import { addClient, clients, loadClients } from '$lib/stores/clientStore';
+  import { addClient, clients, loadClients } from '$lib/stores/ClientStore';
   import { today } from '$lib/utils/dateHelpers';
   import states from '$lib/utils/states';
   import { onMount } from 'svelte';

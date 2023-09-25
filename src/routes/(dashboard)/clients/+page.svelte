@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Button, Search } from '$lib/components';
-  import { clients, loadClients } from '$lib/stores/clientStore';
+  import { clients, loadClients } from '$lib/stores/ClientStore';
   import { onMount } from 'svelte';
   import ClientRow from './ClientRow.svelte';
   import ClientRowHeader from './ClientRowHeader.svelte';
