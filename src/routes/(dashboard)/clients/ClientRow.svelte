@@ -1,8 +1,29 @@
 <script lang="ts">
   import { AdditionalOptions, Tag } from '$lib/components';
   import { Activate, Archive, Edit, ThreeDots, Trash, View } from '$lib/components/Icons';
+  import { centsToDollars, sumInvoices } from '$lib/utils/moneyHelpers';
 
   export let client: Client;
+
+  const receivedInvoices = () => {
+    if (client.invoices) {
+      const paidInvoices = client.invoices.filter((invoice) => invoice.invoiceStatus === 'paid');
+
+      return sumInvoices(paidInvoices);
+    }
+
+    return 0;
+  };
+
+  const balanceInvoices = () => {
+    if (client.invoices) {
+      const unpaidInvoices = client.invoices.filter((invoice) => invoice.invoiceStatus !== 'paid');
+
+      return sumInvoices(unpaidInvoices);
+    }
+
+    return 0;
+  };
 
   let isAdditionalOptionsShowing: boolean = false;
 </script>
@@ -12,8 +33,12 @@
   <div class="client-name truncate whitespace-nowrap text-base font-bold lg:text-xl">
     {client.name}
   </div>
-  <div class="received font-mono text-sm font-bold lg:text-lg">$336</div>
-  <div class="balance text-right font-mono text-sm font-bold text-scarlet lg:text-lg">$200</div>
+  <div class="received font-mono text-sm font-bold lg:text-lg">
+    ${centsToDollars(receivedInvoices())}
+  </div>
+  <div class="balance text-right font-mono text-sm font-bold text-scarlet lg:text-lg">
+    ${centsToDollars(balanceInvoices())}
+  </div>
   <div class="view relative hidden items-center justify-center lg:flex">
     <a href="/" class="text-pastelPurple hover:text-daisyBush">
       <View />

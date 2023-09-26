@@ -60,7 +60,7 @@ export const dollarsToCents = (dollars: number): number => {
  */
 export const sumInvoices = (invoices: Invoice[]): number => {
   return invoices.reduce((prevValue, curValue) => {
-    const sumInvoice = sumLineItems(curValue.lineItems);
+    const sumInvoice = invoiceTotal(curValue.lineItems, curValue.discount);
     return prevValue + sumInvoice;
   }, 0);
 };

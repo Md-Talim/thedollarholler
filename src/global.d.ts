@@ -29,6 +29,7 @@ declare global {
     clientStatus?: ClientStatus;
     email: string;
     id: string;
+    invoices: Invoice[];
     name: string;
     state?: string;
     street?: string;
