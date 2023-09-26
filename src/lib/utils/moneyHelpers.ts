@@ -38,6 +38,12 @@ export const centsToDollars = (cents: number): string => {
   return addThousandSeparator(decimaledDollars);
 };
 
+/**
+ * Converts the given amount in cents to dollars without commas.
+ *
+ * @param {number} cents - The amount in cents to be converted.
+ * @return {string} The converted amount in dollars without commas.
+ */
 export const centsToDollarsWithoutCommas = (cents: number): string => {
   const dollars = cents / 100;
   return twoDecimals(dollars);
