@@ -1,10 +1,17 @@
 <script lang="ts">
-  import { Button, Search } from '$lib/components';
+  import { Button, Search, SlidePanel } from '$lib/components';
   import { clients, loadClients } from '$lib/stores/ClientStore';
   import { onMount } from 'svelte';
   import BlankState from './BlankState.svelte';
   import ClientRow from './ClientRow.svelte';
   import ClientRowHeader from './ClientRowHeader.svelte';
+  import ClientForm from './ClientForm.svelte';
+
+  let isClientFormShowing: boolean = false;
+
+  const closePanel = () => {
+    isClientFormShowing = false;
+  };
 
   onMount(() => {
     loadClients();
@@ -26,7 +33,12 @@
   {/if}
 
   <!-- New Invoice Button -->
-  <Button label="+ Client" onClick={() => {}} />
+  <Button
+    label="+ Client"
+    onClick={() => {
+      isClientFormShowing = true;
+    }}
+  />
 </div>
 
 <!-- Clients -->
@@ -48,3 +60,10 @@
     </div>
   {/if}
 </div>
+
+<!-- Slide Panel -->
+{#if isClientFormShowing}
+  <SlidePanel on:close={closePanel}>
+    <ClientForm {closePanel} />
+  </SlidePanel>
+{/if}
