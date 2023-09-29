@@ -1,7 +1,8 @@
 <script lang="ts">
   import { Button } from '$lib/components';
   import { Trash } from '$lib/components/Icons';
-  import { addClient } from '$lib/stores/ClientStore';
+  import { addClient, updateClient } from '$lib/stores/ClientStore';
+  import { snackbar } from '$lib/stores/SnackbarStore';
   import states from '$lib/utils/states';
 
   export let closePanel: () => void = () => {};
@@ -9,7 +10,19 @@
   export let formState: 'create' | 'edit' = 'create';
 
   const handleSubmit = () => {
-    addClient(client);
+    if (formState === 'create') {
+      addClient(client);
+      snackbar.send({
+        message: 'Your client has been created.',
+        type: 'success'
+      });
+    } else {
+      updateClient(client);
+      snackbar.send({
+        message: 'Your client has been updated.',
+        type: 'success'
+      });
+    }
 
     closePanel();
   };

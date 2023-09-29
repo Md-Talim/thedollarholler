@@ -20,6 +20,21 @@ export const loadClients = (): void => {
  * @return {Client} The added client.
  */
 export const addClient = (clientToAdd: Client): Client => {
-  clients.update((clients) => [...clients, clientToAdd]);
+  clients.update((clients) => [...clients, { ...clientToAdd, clientStatus: 'active' }]);
   return clientToAdd;
+};
+
+/**
+ * Updates a client in the system.
+ *
+ * @param {Client} clientToUpdate - The client object to be updated.
+ * @return {Client} The updated client object.
+ */
+export const updateClient = (clientToUpdate: Client): Client => {
+  clients.update((clients) =>
+    clients.map((currrentClient) =>
+      currrentClient.id === clientToUpdate.id ? clientToUpdate : currrentClient
+    )
+  );
+  return clientToUpdate;
 };

@@ -1,7 +1,8 @@
 <script lang="ts">
-  import { AdditionalOptions, Tag } from '$lib/components';
+  import { AdditionalOptions, SlidePanel, Tag } from '$lib/components';
   import { Activate, Archive, Edit, ThreeDots, Trash, View } from '$lib/components/Icons';
   import { centsToDollars, sumInvoices } from '$lib/utils/moneyHelpers';
+  import ClientForm from './ClientForm.svelte';
 
   export let client: Client;
 
@@ -26,6 +27,16 @@
   };
 
   let isAdditionalOptionsShowing: boolean = false;
+  let isClientFormShowing: boolean = false;
+
+  const closePanel = () => {
+    isClientFormShowing = false;
+  };
+
+  const handleEdit = () => {
+    isClientFormShowing = true;
+    isAdditionalOptionsShowing = false;
+  };
 </script>
 
 <div class="client-table client-row rounded-lg bg-white py-3 shadow-tableRow lg:py-6">
@@ -58,7 +69,7 @@
             text: 'Edit',
             icon: Edit,
             onClick: () => {
-              console.log('editing');
+              handleEdit();
             },
             disabled: false
           },
@@ -93,6 +104,13 @@
     {/if}
   </div>
 </div>
+
+<!-- Slide Panel -->
+{#if isClientFormShowing}
+  <SlidePanel on:close={closePanel}>
+    <ClientForm {closePanel} {client} formState="edit" />
+  </SlidePanel>
+{/if}
 
 <style lang="postcss">
   .client-row {
