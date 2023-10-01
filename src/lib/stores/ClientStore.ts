@@ -38,3 +38,7 @@ export const updateClient = (clientToUpdate: Client): Client => {
   );
   return clientToUpdate;
 };
+
+export const getClientById = (id: string) => {
+  return data.clients.find((client) => client.id === id);
+};
