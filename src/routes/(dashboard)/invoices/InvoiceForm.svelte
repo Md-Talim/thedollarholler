@@ -262,7 +262,7 @@
     <button
       class="button translate-y-0 bg-lavenderIndigo text-white shadow-colored transition-all hover:-translate-y-2 hover:shadow-coloredHover"
     >
-      Save
+      {#if formState === 'edit'} Update {:else} Add {/if} Invoice
     </button>
   </div>
 </form>

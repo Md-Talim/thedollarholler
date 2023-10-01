@@ -2,6 +2,7 @@ import Activate from './Activate.svelte';
 import Archive from './Archive.svelte';
 import Arrow from './Arrow.svelte';
 import Cancel from './Cancel.svelte';
+import Check from './Check.svelte';
 import Close from './Close.svelte';
 import Edit from './Edit.svelte';
 import Hamburger from './Hamburger.svelte';
@@ -16,6 +17,7 @@ export {
   Archive,
   Arrow,
   Cancel,
+  Check,
   Close,
   Edit,
   Hamburger,

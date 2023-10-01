@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Button } from '$lib/components';
-  import { Trash } from '$lib/components/Icons';
+  import { Check, Trash } from '$lib/components/Icons';
   import { addClient, updateClient } from '$lib/stores/ClientStore';
   import { snackbar } from '$lib/stores/SnackbarStore';
   import states from '$lib/utils/states';
@@ -93,7 +93,8 @@
     <button
       class="button translate-y-0 bg-lavenderIndigo text-white shadow-colored transition-all hover:-translate-y-2 hover:shadow-coloredHover"
     >
-      Save
+      <Check />
+      {#if formState === 'edit'} Update {:else} Add {/if} Client
     </button>
   </div>
 </form>
