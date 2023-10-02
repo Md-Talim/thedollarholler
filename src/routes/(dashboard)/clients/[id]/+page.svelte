@@ -1,6 +1,7 @@
 <script lang="ts">
   import { Button, CircledAmount, Search, SlidePanel } from '$lib/components';
   import { Edit } from '$lib/components/Icons';
+  import { isLate } from '$lib/utils/dateHelpers';
   import { centsToDollars, sumInvoices } from '$lib/utils/moneyHelpers';
   import BlankState from '../../invoices/BlankState.svelte';
   import InvoiceRow from '../../invoices/InvoiceRow.svelte';
@@ -20,6 +21,36 @@
   const closePanel = () => {
     isClientFormShowing = false;
     isEditingClient = false;
+  };
+
+  const getDraft = (): string => {
+    const draftInvoices = data.client.invoices.filter(
+      (invoice) => invoice.invoiceStatus === 'draft'
+    );
+
+    return centsToDollars(sumInvoices(draftInvoices));
+  };
+
+  const getPaid = (): string => {
+    const paidInvoices = data.client.invoices.filter((invoice) => invoice.invoiceStatus === 'paid');
+
+    return centsToDollars(sumInvoices(paidInvoices));
+  };
+
+  const getTotalOverdue = (): string => {
+    const unpaidInvoices = data.client.invoices.filter(
+      (invoice) => invoice.invoiceStatus === 'sent' && isLate(invoice.dueDate)
+    );
+
+    return centsToDollars(sumInvoices(unpaidInvoices));
+  };
+
+  const getTotalOutstanding = (): string => {
+    const unpaidInvoices = data.client.invoices.filter(
+      (invoice) => invoice.invoiceStatus === 'sent' && !isLate(invoice.dueDate)
+    );
+
+    return centsToDollars(sumInvoices(unpaidInvoices));
   };
 </script>
 
@@ -52,19 +83,19 @@
 >
   <div class="summary-block">
     <div class="label">Total Overdue</div>
-    <div class="number"><sup>$</sup>300.00</div>
+    <div class="number"><sup>$</sup>{getTotalOverdue()}</div>
   </div>
   <div class="summary-block">
     <div class="label">Total Outstanding</div>
-    <div class="number"><sup>$</sup>300.00</div>
+    <div class="number"><sup>$</sup>{getTotalOutstanding()}</div>
   </div>
   <div class="summary-block">
     <div class="label">Total Draft</div>
-    <div class="number"><sup>$</sup>300.00</div>
+    <div class="number"><sup>$</sup>{getDraft()}</div>
   </div>
   <div class="summary-block">
     <div class="label">Total Paid</div>
-    <div class="number"><sup>$</sup>300.00</div>
+    <div class="number"><sup>$</sup>{getPaid()}</div>
   </div>
 </div>
 
