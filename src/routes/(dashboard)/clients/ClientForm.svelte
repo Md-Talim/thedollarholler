@@ -91,7 +91,7 @@
       isAnimated={false}
     />
     <button
-      class="button translate-y-0 bg-lavenderIndigo text-white shadow-colored transition-all hover:-translate-y-2 hover:shadow-coloredHover"
+      class="button center translate-y-0 gap-2 bg-lavenderIndigo text-white shadow-colored transition-all hover:-translate-y-2 hover:shadow-coloredHover"
     >
       <Check />
       {#if formState === 'edit'} Update {:else} Add {/if} Client
