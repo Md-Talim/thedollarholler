@@ -1,10 +1,13 @@
 <script lang="ts">
+  import { Alert } from '$lib/components';
   let email: string, password: string;
+  let alertMessage = '';
 </script>
 
 <h1 class="mb-4 text-[3.5rem] font-black text-goldenFizz">Login</h1>
 
 <form>
+  <Alert message={alertMessage} />
   <div class="field">
     <label for="email" class="text-goldenFizz">Email</label>
     <input
