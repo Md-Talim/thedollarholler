@@ -1,5 +1,6 @@
 <script lang="ts">
   import { clickOutside } from '$lib/actions/ClickOutside';
+  import { swipe } from '$lib/actions/Swipe';
   import { AdditionalOptions, SlidePanel, Tag } from '$lib/components';
   import { Edit, Send, ThreeDots, Trash, View } from '$lib/components/Icons';
   import { convertDateFormat, isLate } from '$lib/utils/dateHelpers';
@@ -42,7 +43,7 @@
   };
 </script>
 
-<div class="invoice-table invoice-row rounded-lg bg-white py-2 shadow-tableRow md:py-4">
+<div class="invoice-table invoice-row rounded-lg bg-white py-2 shadow-tableRow md:py-4" use:swipe>
   <div class="status"><Tag className="ml-auto lg:ml-0" label={getInvoiceLabel()} /></div>
   <div class="due-date text-sm md:text-lg">{convertDateFormat(invoice.dueDate)}</div>
   <div class="invoice-number text-sm md:text-lg">{invoice.invoiceNumber}</div>
