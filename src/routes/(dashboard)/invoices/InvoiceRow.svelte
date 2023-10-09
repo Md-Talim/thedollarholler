@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { clickOutside } from '$lib/actions/ClickOutside';
   import { AdditionalOptions, SlidePanel, Tag } from '$lib/components';
   import { Edit, Send, ThreeDots, Trash, View } from '$lib/components/Icons';
   import { convertDateFormat, isLate } from '$lib/utils/dateHelpers';
@@ -54,7 +55,12 @@
   <div class="view-button lg:center hidden text-sm md:text-lg">
     <a href={`/invoices/${invoice.id}`} class="text-pastelPurple hover:text-daisyBush"><View /></a>
   </div>
-  <div class="more-button lg:center relative hidden text-sm md:text-lg">
+  <div
+    class="more-button lg:center relative hidden text-sm md:text-lg"
+    use:clickOutside={() => {
+      isAdditionalOptionsShowing = false;
+    }}
+  >
     <button
       class="text-pastelPurple hover:text-daisyBush"
       on:click={() => {

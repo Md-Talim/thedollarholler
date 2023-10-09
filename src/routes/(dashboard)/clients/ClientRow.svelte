@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { clickOutside } from '$lib/actions/ClickOutside';
   import { AdditionalOptions, SlidePanel, Tag } from '$lib/components';
   import { Activate, Archive, Edit, ThreeDots, Trash, View } from '$lib/components/Icons';
   import { centsToDollars, sumInvoices } from '$lib/utils/moneyHelpers';
@@ -55,7 +56,12 @@
       <View />
     </a>
   </div>
-  <div class="three-dots relative hidden items-center justify-center lg:flex">
+  <div
+    class="three-dots relative hidden items-center justify-center lg:flex"
+    use:clickOutside={() => {
+      isAdditionalOptionsShowing = false;
+    }}
+  >
     <button
       class="text-pastelPurple hover:text-daisyBush"
       on:click={() => (isAdditionalOptionsShowing = !isAdditionalOptionsShowing)}
