@@ -1,8 +1,14 @@
 import type { Action } from 'svelte/action';
 import { spring } from 'svelte/motion';
 
-export const swipe: Action<HTMLElement, any> = (node, _swipeParams?) => {
+interface SwipeParams {
+  triggerReset?: boolean;
+}
+
+export const swipe: Action<HTMLElement, SwipeParams> = (node, swipeParams) => {
   let x: number, startingX: number;
+  let triggerReset = swipeParams?.triggerReset;
+
   const elementWidth = node.clientWidth;
   const coordinates = spring(
     { x: 0, y: 0 },
@@ -15,6 +21,21 @@ export const swipe: Action<HTMLElement, any> = (node, _swipeParams?) => {
   coordinates.subscribe(($coord) => {
     node.style.transform = `translate3d(${$coord.x}px, 0, 0)`;
   });
+
+  const resetCard = () => {
+    coordinates.update(() => {
+      return {
+        x: 0,
+        y: 0
+      };
+    });
+
+    triggerReset = false;
+  };
+
+  const outOfView = () => {
+    node.dispatchEvent(new CustomEvent('outOfView'));
+  };
 
   const handleMouseDown = (event: MouseEvent) => {
     x = event.clientX;
@@ -52,13 +73,12 @@ export const swipe: Action<HTMLElement, any> = (node, _swipeParams?) => {
 
     if (movement > 20) {
       x = leftSnapX;
-      updateCoordinates(x);
+      outOfView();
+    } else {
+      x = rightSnapX;
     }
 
-    if (movement < 20) {
-      x = rightSnapX;
-      updateCoordinates(x);
-    }
+    updateCoordinates(x);
   };
 
   const handleMouseUp = (event: MouseEvent) => {
@@ -71,6 +91,12 @@ export const swipe: Action<HTMLElement, any> = (node, _swipeParams?) => {
   node.addEventListener('mousedown', handleMouseDown);
 
   return {
+    update(newParams: SwipeParams) {
+      if (newParams.triggerReset) {
+        resetCard();
+      }
+    },
+
     destroy() {
       node.removeEventListener('mousedown', handleMouseDown);
     }

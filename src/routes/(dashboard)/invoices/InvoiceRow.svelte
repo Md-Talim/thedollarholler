@@ -13,6 +13,7 @@
   let isOptionsDisabled: boolean = false;
   let isModalShowing: boolean = false;
   let isInvoiceFormShowing: boolean = false;
+  let triggerReset: boolean = false;
 
   const handleEdit = () => {
     isInvoiceFormShowing = true;
@@ -46,7 +47,10 @@
 <div class="relative">
   <div
     class="invoice-table invoice-row relative z-row rounded-lg bg-white py-2 shadow-tableRow md:py-4"
-    use:swipe
+    use:swipe={{ triggerReset }}
+    on:outOfView={() => {
+      triggerReset = false;
+    }}
   >
     <div class="status"><Tag className="ml-auto lg:ml-0" label={getInvoiceLabel()} /></div>
     <div class="due-date text-sm md:text-lg">{convertDateFormat(invoice.dueDate)}</div>
@@ -89,7 +93,12 @@
 
   <!-- Swipe to reveal -->
   <div class="absolute inset-0 z-rowActions flex w-full items-center justify-around">
-    <button class="action-button">
+    <button
+      class="action-button"
+      on:click={() => {
+        triggerReset = true;
+      }}
+    >
       <Cancel height={32} width={32} />
       Cancel
     </button>
