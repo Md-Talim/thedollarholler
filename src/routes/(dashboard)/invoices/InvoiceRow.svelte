@@ -2,7 +2,7 @@
   import { clickOutside } from '$lib/actions/ClickOutside';
   import { swipe } from '$lib/actions/Swipe';
   import { AdditionalOptions, SlidePanel, Tag } from '$lib/components';
-  import { Edit, Send, ThreeDots, Trash, View } from '$lib/components/Icons';
+  import { Cancel, Edit, Send, ThreeDots, Trash, View } from '$lib/components/Icons';
   import { convertDateFormat, isLate } from '$lib/utils/dateHelpers';
   import { centsToDollars, invoiceTotal } from '$lib/utils/moneyHelpers';
   import ConfirmDelete from './ConfirmDelete.svelte';
@@ -43,42 +43,74 @@
   };
 </script>
 
-<div class="invoice-table invoice-row rounded-lg bg-white py-2 shadow-tableRow md:py-4" use:swipe>
-  <div class="status"><Tag className="ml-auto lg:ml-0" label={getInvoiceLabel()} /></div>
-  <div class="due-date text-sm md:text-lg">{convertDateFormat(invoice.dueDate)}</div>
-  <div class="invoice-number text-sm md:text-lg">{invoice.invoiceNumber}</div>
-  <div class="client-name truncate whitespace-nowrap text-base font-bold md:text-xl">
-    {invoice.client.name}
-  </div>
-  <div class="amount text-right font-mono text-sm font-bold lg:text-lg">
-    ${centsToDollars(invoiceTotal(invoice.lineItems, invoice.discount))}
-  </div>
-  <div class="view-button lg:center hidden text-sm md:text-lg">
-    <a href={`/invoices/${invoice.id}`} class="text-pastelPurple hover:text-daisyBush"><View /></a>
-  </div>
+<div class="relative">
   <div
-    class="more-button lg:center relative hidden text-sm md:text-lg"
-    use:clickOutside={() => {
-      isAdditionalOptionsShowing = false;
-    }}
+    class="invoice-table invoice-row relative z-row rounded-lg bg-white py-2 shadow-tableRow md:py-4"
+    use:swipe
   >
-    <button
-      class="text-pastelPurple hover:text-daisyBush"
-      on:click={() => {
-        isAdditionalOptionsShowing = !isAdditionalOptionsShowing;
+    <div class="status"><Tag className="ml-auto lg:ml-0" label={getInvoiceLabel()} /></div>
+    <div class="due-date text-sm md:text-lg">{convertDateFormat(invoice.dueDate)}</div>
+    <div class="invoice-number text-sm md:text-lg">{invoice.invoiceNumber}</div>
+    <div class="client-name truncate whitespace-nowrap text-base font-bold md:text-xl">
+      {invoice.client.name}
+    </div>
+    <div class="amount text-right font-mono text-sm font-bold lg:text-lg">
+      ${centsToDollars(invoiceTotal(invoice.lineItems, invoice.discount))}
+    </div>
+    <div class="view-button lg:center hidden text-sm md:text-lg">
+      <a href={`/invoices/${invoice.id}`} class="text-pastelPurple hover:text-daisyBush"><View /></a
+      >
+    </div>
+    <div
+      class="more-button lg:center relative hidden text-sm md:text-lg"
+      use:clickOutside={() => {
+        isAdditionalOptionsShowing = false;
       }}
     >
-      <ThreeDots />
+      <button
+        class="text-pastelPurple hover:text-daisyBush"
+        on:click={() => {
+          isAdditionalOptionsShowing = !isAdditionalOptionsShowing;
+        }}
+      >
+        <ThreeDots />
+      </button>
+      {#if isAdditionalOptionsShowing}
+        <AdditionalOptions
+          options={[
+            { text: 'Edit', icon: Edit, onClick: handleEdit, disabled: isOptionsDisabled },
+            { text: 'Delete', icon: Trash, onClick: handleDelete, disabled: false },
+            { text: 'Send', icon: Send, onClick: handleSendInvoice, disabled: isOptionsDisabled }
+          ]}
+        />
+      {/if}
+    </div>
+  </div>
+
+  <!-- Swipe to reveal -->
+  <div class="absolute inset-0 z-rowActions flex w-full items-center justify-around">
+    <button class="action-button">
+      <Cancel height={32} width={32} />
+      Cancel
     </button>
-    {#if isAdditionalOptionsShowing}
-      <AdditionalOptions
-        options={[
-          { text: 'Edit', icon: Edit, onClick: handleEdit, disabled: isOptionsDisabled },
-          { text: 'Delete', icon: Trash, onClick: handleDelete, disabled: false },
-          { text: 'Send', icon: Send, onClick: handleSendInvoice, disabled: isOptionsDisabled }
-        ]}
-      />
+    {#if !isOptionsDisabled}
+      <button class="action-button" on:click={handleEdit}>
+        <Edit height={32} width={32} />
+        Edit
+      </button>
+      <button class="action-button" on:click={handleSendInvoice}>
+        <Send height={32} width={32} />
+        Send
+      </button>
     {/if}
+    <button class="action-button" on:click={handleDelete}>
+      <Trash height={32} width={32} />
+      Delete
+    </button>
+    <a href={`/invoices/${invoice.id}`} class="action-button">
+      <View height={32} width={32} />
+      View
+    </a>
   </div>
 </div>
 
@@ -122,5 +154,9 @@
   }
   .more-button {
     grid-area: more-button;
+  }
+
+  .action-button {
+    @apply flex flex-col items-center justify-center;
   }
 </style>
