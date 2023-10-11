@@ -166,6 +166,6 @@
   }
 
   .action-button {
-    @apply flex flex-col items-center justify-center;
+    @apply flex flex-col items-center justify-center text-lavenderIndigo hover:text-daisyBush;
   }
 </style>

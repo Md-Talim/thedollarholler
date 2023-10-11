@@ -12,7 +12,6 @@
 
   onMount(() => {
     loadInvoices();
-    console.log($invoices);
   });
 </script>
 
