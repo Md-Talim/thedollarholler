@@ -7,9 +7,9 @@ interface SwipeParams {
 
 export const swipe: Action<HTMLElement, SwipeParams> = (node, swipeParams) => {
   let x: number, startingX: number;
-  let triggerReset = swipeParams?.triggerReset;
+  let triggerReset = swipeParams?.triggerReset || false;
 
-  const elementWidth = node.clientWidth;
+  let elementWidth = node.clientWidth;
   const coordinates = spring(
     { x: 0, y: 0 },
     {
@@ -88,7 +88,28 @@ export const swipe: Action<HTMLElement, SwipeParams> = (node, swipeParams) => {
     window.removeEventListener('mouseup', handleMouseUp);
   };
 
-  node.addEventListener('mousedown', handleMouseDown);
+  const isMobileBreakPoint = () => {
+    const mediaQuery = window.matchMedia('(max-width: 1024px)');
+    if (mediaQuery.matches) {
+      return true;
+    }
+
+    return false;
+  };
+
+  if (isMobileBreakPoint()) {
+    node.addEventListener('mousedown', handleMouseDown);
+  }
+
+  window.addEventListener('resize', () => {
+    if (isMobileBreakPoint()) {
+      node.addEventListener('mousedown', handleMouseDown);
+    } else {
+      node.removeEventListener('mousedown', handleMouseDown);
+    }
+
+    elementWidth = node.clientWidth;
+  });
 
   return {
     update(newParams: SwipeParams) {
