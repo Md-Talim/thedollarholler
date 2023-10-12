@@ -123,19 +123,22 @@ export const swipe: Action<HTMLElement, SwipeParams> = (node, swipeParams) => {
     return false;
   };
 
-  if (isMobileBreakPoint()) {
-    node.addEventListener('mousedown', handleMouseDown);
-    node.addEventListener('touchstart', handleTouchStart);
-  }
-
-  window.addEventListener('resize', () => {
+  const setUpEventListeners = () => {
     if (isMobileBreakPoint()) {
       node.addEventListener('mousedown', handleMouseDown);
+      node.addEventListener('touchstart', handleTouchStart);
     } else {
       node.removeEventListener('mousedown', handleMouseDown);
+      node.removeEventListener('touchstart', handleTouchStart);
     }
 
     elementWidth = node.clientWidth;
+  };
+
+  setUpEventListeners();
+
+  window.addEventListener('resize', () => {
+    setUpEventListeners();
   });
 
   return {
