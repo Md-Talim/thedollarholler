@@ -50,6 +50,14 @@
 }
 
 @layer components {
+  .swipe-revealed-actions {
+    @apply absolute inset-0 z-rowActions flex w-full items-center justify-around;
+  }
+
+  .action-button {
+    @apply flex flex-col items-center justify-center text-lavenderIndigo hover:text-daisyBush;
+  }
+
   .client-table {
     @apply mb-3 grid w-full grid-cols-clientTableMobile gap-x-4 px-4 lg:grid-cols-clientTable lg:px-6;
   }

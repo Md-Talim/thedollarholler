@@ -92,7 +92,7 @@
   </div>
 
   <!-- Swipe to reveal -->
-  <div class="absolute inset-0 z-rowActions flex w-full items-center justify-around">
+  <div class="swipe-revealed-actions">
     <button
       class="action-button"
       on:click={() => {
@@ -163,9 +163,5 @@
   }
   .more-button {
     grid-area: more-button;
-  }
-
-  .action-button {
-    @apply flex flex-col items-center justify-center text-lavenderIndigo hover:text-daisyBush;
   }
 </style>
