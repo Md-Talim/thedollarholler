@@ -1,5 +1,5 @@
+import supabase from '$lib/utils/supabase';
 import { writable } from 'svelte/store';
-import data from '../../seed.json';
 
 export const clients = writable<Client[]>([]);
 
@@ -7,10 +7,19 @@ export const clients = writable<Client[]>([]);
  * Loads the clients into the 'clients' data structure.
  *
  * @param {void} - No parameters are required.
- * @return {void} - No return value.
+ * @return {Promise<void>} - A Promise that resolves when the clients are loaded.
  */
-export const loadClients = (): void => {
-  clients.set(data.clients);
+export const loadClients = async (): Promise<void> => {
+  const { data, error } = await supabase
+    .from('client')
+    .select('*, invoice(id, invoiceStatus, lineItems(*))');
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  clients.set(data as Client[]);
 };
 
 /**
@@ -39,6 +48,18 @@ export const updateClient = (clientToUpdate: Client): Client => {
   return clientToUpdate;
 };
 
-export const getClientById = (id: string) => {
-  return data.clients.find((client) => client.id === id);
+export const getClientById = async (id: string) => {
+  const { data, error } = await supabase
+    .from('client')
+    .select('*, invoice(id, invoiceStatus, invoiceNumber, dueDate, client(id, name), lineItems(*))')
+    .eq('id', id);
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  if (data && data[0]) return data[0] as Client;
+
+  console.warn('Cannot find client with id:', id);
 };

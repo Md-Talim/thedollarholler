@@ -24,7 +24,7 @@
   };
 
   const getDraft = (): string => {
-    const draftInvoices = data.client.invoices.filter(
+    const draftInvoices = data.client.invoice.filter(
       (invoice) => invoice.invoiceStatus === 'draft'
     );
 
@@ -32,13 +32,13 @@
   };
 
   const getPaid = (): string => {
-    const paidInvoices = data.client.invoices.filter((invoice) => invoice.invoiceStatus === 'paid');
+    const paidInvoices = data.client.invoice.filter((invoice) => invoice.invoiceStatus === 'paid');
 
     return centsToDollars(sumInvoices(paidInvoices));
   };
 
   const getTotalOverdue = (): string => {
-    const unpaidInvoices = data.client.invoices.filter(
+    const unpaidInvoices = data.client.invoice.filter(
       (invoice) => invoice.invoiceStatus === 'sent' && isLate(invoice.dueDate)
     );
 
@@ -46,7 +46,7 @@
   };
 
   const getTotalOutstanding = (): string => {
-    const unpaidInvoices = data.client.invoices.filter(
+    const unpaidInvoices = data.client.invoice.filter(
       (invoice) => invoice.invoiceStatus === 'sent' && !isLate(invoice.dueDate)
     );
 
@@ -62,7 +62,7 @@
   class="mb-8 flex flex-col-reverse items-start justify-between gap-y-4 md:flex-row md:items-center lg:mb-16"
 >
   <!-- Search Field -->
-  {#if data.client.invoices.length > 0}
+  {#if data.client.invoice.length > 0}
     <Search />
   {:else}
     <div />
@@ -101,21 +101,21 @@
 
 <!-- List of Invoices -->
 <div>
-  {#if data.client.invoices === null}
+  {#if data.client.invoice === null}
     Loading...
-  {:else if data.client.invoices.length <= 0}
+  {:else if data.client.invoice.length <= 0}
     <BlankState />
   {:else}
     <!-- Heading -->
     <InvoiceRowHeader className="text-daisyBush" />
     <!-- Invoices -->
     <div class="flex flex-col-reverse">
-      {#each data.client.invoices as invoice}
+      {#each data.client.invoice as invoice}
         <InvoiceRow {invoice} />
       {/each}
     </div>
     <!-- Circled Amount / Total Amount -->
-    <CircledAmount label="Total" amount={`${centsToDollars(sumInvoices(data.client.invoices))}`} />
+    <CircledAmount label="Total" amount={`${centsToDollars(sumInvoices(data.client.invoice))}`} />
   {/if}
 </div>
 
