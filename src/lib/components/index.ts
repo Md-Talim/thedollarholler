@@ -3,6 +3,7 @@ import Alert from './Alert.svelte';
 import BlankRow from './BlankRow.svelte';
 import Button from './Button.svelte';
 import CircledAmount from './CircledAmount.svelte';
+import Loader from './Loader.svelte';
 import Modal from './Modal.svelte';
 import Navbar from './Navbar.svelte';
 import Overlay from './Overlay.svelte';
@@ -19,6 +20,7 @@ export {
   BlankRow,
   Button,
   CircledAmount,
+  Loader,
   Modal,
   Navbar,
   Overlay,

@@ -9,13 +9,16 @@
   export let client: Client = {} as Client;
   export let formState: 'create' | 'edit' = 'create';
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (formState === 'create') {
-      addClient(client);
-      snackbar.send({
-        message: 'Your client has been created.',
-        type: 'success'
-      });
+      const addedClient = await addClient(client);
+
+      if (addedClient) {
+        snackbar.send({
+          message: 'Your client has been created.',
+          type: 'success'
+        });
+      }
     } else {
       updateClient(client);
       snackbar.send({

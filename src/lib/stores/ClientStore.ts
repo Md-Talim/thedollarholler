@@ -1,5 +1,6 @@
 import supabase from '$lib/utils/supabase';
 import { writable } from 'svelte/store';
+import { snackbar } from './SnackbarStore';
 
 export const clients = writable<Client[]>([]);
 
@@ -28,8 +29,21 @@ export const loadClients = async (): Promise<void> => {
  * @param {Client} clientToAdd - The client to be added.
  * @return {Client} The added client.
  */
-export const addClient = (clientToAdd: Client): Client => {
-  clients.update((clients) => [...clients, { ...clientToAdd, clientStatus: 'active' }]);
+export const addClient = async (clientToAdd: Client): Promise<Client | void> => {
+  const { data, error } = await supabase
+    .from('client')
+    .insert([{ ...clientToAdd, clientStatus: 'active' }])
+    .select();
+
+  if (error) {
+    console.error(error);
+    snackbar.send({ message: 'Failed to add client', type: 'error' });
+    return;
+  }
+
+  const id = data[0].id;
+
+  clients.update((clients) => [...clients, { ...clientToAdd, clientStatus: 'active', id }]);
   return clientToAdd;
 };
 
